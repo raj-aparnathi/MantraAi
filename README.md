@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Mantra AI v2.0 — Desktop Automation Assistant
 
 > **Version 2.0** — Windows Desktop Automation Edition  
@@ -227,3 +228,7 @@ List my bookmarks
 ---
 
 *Mantra AI v2.0 — Built with Python*
+=======
+# MantraAi
+Mantra AI – An open-source personal AI assistant with voice interaction, desktop automation, LLM integration, and intelligent task execution.
+>>>>>>> 2aeaaed65ff7966a4b6472670b758879e9fd9045
