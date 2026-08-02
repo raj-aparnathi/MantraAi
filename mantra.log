@@ -1,0 +1,613 @@
+2026-08-01 22:06:05 | INFO     | MantraAI | Note saved: 'Buy groceries – milk, eggs, and bread'
+2026-08-01 22:06:05 | INFO     | MantraAI | Note saved: 'Meeting with team tomorrow at 10 AM'
+2026-08-01 22:06:16 | INFO     | MantraAI | Wikipedia summary fetched for: 'Python programming language'
+2026-08-01 22:13:05 | INFO     | MantraAI | TTS voice set to: Microsoft Hazel Desktop - English (Great Britain)
+2026-08-01 22:13:05 | INFO     | MantraAI | TextToSpeech initialised.
+2026-08-01 22:13:05 | INFO     | MantraAI | SpeechToText initialised.
+2026-08-01 22:13:05 | INFO     | MantraAI | Speaking: 'Hello! I'm Mantra, version 1.0. Please wait while I calibrate my microphone.'
+2026-08-01 22:13:13 | INFO     | MantraAI | Calibrating microphone for ambient noise…
+2026-08-01 22:13:15 | INFO     | MantraAI | Calibration complete.
+2026-08-01 22:13:15 | INFO     | MantraAI | WakeWordDetector ready. Wake word: 'hello mantra'
+2026-08-01 22:13:15 | INFO     | MantraAI | Wake word listener active – waiting for wake word…
+2026-08-01 22:13:15 | INFO     | MantraAI | Wake word detector started.
+2026-08-01 22:13:15 | INFO     | MantraAI | Assistant initialised. All modules loaded.
+2026-08-01 22:13:15 | INFO     | MantraAI | Speaking: 'I'm ready. Say 'Hello Mantra' to wake me up.'
+2026-08-01 22:13:56 | INFO     | MantraAI | TTS voice set to: Microsoft Hazel Desktop - English (Great Britain)
+2026-08-01 22:13:56 | INFO     | MantraAI | TextToSpeech initialised.
+2026-08-01 22:13:56 | INFO     | MantraAI | SpeechToText initialised.
+2026-08-01 22:13:56 | INFO     | MantraAI | Speaking: 'Hello! I'm Mantra, version 1.0. Please wait while I calibrate my microphone.'
+2026-08-01 22:14:04 | INFO     | MantraAI | Calibrating microphone for ambient noise…
+2026-08-01 22:14:06 | INFO     | MantraAI | Calibration complete.
+2026-08-01 22:14:06 | INFO     | MantraAI | WakeWordDetector ready. Wake word: 'hello mantra'
+2026-08-01 22:14:06 | INFO     | MantraAI | Wake word listener active – waiting for wake word…
+2026-08-01 22:14:06 | INFO     | MantraAI | Wake word detector started.
+2026-08-01 22:14:06 | INFO     | MantraAI | Assistant initialised. All modules loaded.
+2026-08-01 22:14:06 | INFO     | MantraAI | Speaking: 'I'm ready. Say 'Hello Mantra' to wake me up.'
+2026-08-01 22:14:22 | INFO     | MantraAI | Interrupt signal received. Exiting.
+2026-08-01 22:14:22 | INFO     | MantraAI | Wake word detector stopped.
+2026-08-01 22:14:22 | INFO     | MantraAI | Speaking: 'Goodbye! Mantra is shutting down.'
+2026-08-01 22:14:26 | INFO     | MantraAI.main | MantraAI shutdown complete.
+2026-08-01 22:14:26 | INFO     | MantraAI.main | MantraAI shutdown complete.
+2026-08-01 22:14:51 | WARNING  | MantraAI | Preferred 'Male' voice not found. Using: Microsoft David Desktop - English (United States)
+2026-08-01 22:14:51 | INFO     | MantraAI | TextToSpeech initialised.
+2026-08-01 22:14:51 | INFO     | MantraAI | SpeechToText initialised.
+2026-08-01 22:14:51 | INFO     | MantraAI | Speaking: 'Hello! I'm Mantra, version 1.0. Please wait while I calibrate my microphone.'
+2026-08-01 22:14:58 | INFO     | MantraAI | Calibrating microphone for ambient noise…
+2026-08-01 22:15:00 | INFO     | MantraAI | Calibration complete.
+2026-08-01 22:15:00 | INFO     | MantraAI | WakeWordDetector ready. Wake word: 'hello mantra'
+2026-08-01 22:15:00 | INFO     | MantraAI | Wake word listener active – waiting for wake word…
+2026-08-01 22:15:00 | INFO     | MantraAI | Wake word detector started.
+2026-08-01 22:15:00 | INFO     | MantraAI | Assistant initialised. All modules loaded.
+2026-08-01 22:15:00 | INFO     | MantraAI | Speaking: 'I'm ready. Say 'Hello Mantra' to wake me up.'
+2026-08-01 22:15:04 | INFO     | MantraAI | Interrupt signal received. Exiting.
+2026-08-01 22:15:04 | INFO     | MantraAI | Wake word detector stopped.
+2026-08-01 22:15:04 | INFO     | MantraAI | Speaking: 'Goodbye! Mantra is shutting down.'
+2026-08-01 22:15:07 | INFO     | MantraAI.main | MantraAI shutdown complete.
+2026-08-01 22:15:07 | INFO     | MantraAI.main | MantraAI shutdown complete.
+2026-08-01 22:15:17 | WARNING  | MantraAI | Preferred 'Female' voice not found. Using: Microsoft David Desktop - English (United States)
+2026-08-01 22:15:17 | INFO     | MantraAI | TextToSpeech initialised.
+2026-08-01 22:15:17 | INFO     | MantraAI | SpeechToText initialised.
+2026-08-01 22:15:17 | INFO     | MantraAI | Speaking: 'Hello! I'm Mantra, version 1.0. Please wait while I calibrate my microphone.'
+2026-08-01 22:15:24 | INFO     | MantraAI | Interrupt signal received. Exiting.
+2026-08-01 22:15:24 | INFO     | MantraAI | Calibrating microphone for ambient noise…
+2026-08-01 22:15:25 | INFO     | MantraAI | Calibration complete.
+2026-08-01 22:15:25 | INFO     | MantraAI | WakeWordDetector ready. Wake word: 'hello mantra'
+2026-08-01 22:15:25 | INFO     | MantraAI | Wake word listener active – waiting for wake word…
+2026-08-01 22:15:25 | INFO     | MantraAI | Wake word detector started.
+2026-08-01 22:15:25 | INFO     | MantraAI | Assistant initialised. All modules loaded.
+2026-08-01 22:15:25 | INFO     | MantraAI | Speaking: 'I'm ready. Say 'Hello Mantra' to wake me up.'
+2026-08-01 22:15:29 | INFO     | MantraAI | Interrupt signal received. Exiting.
+2026-08-01 22:15:29 | INFO     | MantraAI | Wake word detector stopped.
+2026-08-01 22:15:29 | INFO     | MantraAI | Speaking: 'Goodbye! Mantra is shutting down.'
+2026-08-01 22:15:33 | INFO     | MantraAI.main | MantraAI shutdown complete.
+2026-08-01 22:15:33 | INFO     | MantraAI.main | MantraAI shutdown complete.
+2026-08-01 22:15:35 | INFO     | MantraAI | TTS voice set to: Microsoft Hazel Desktop - English (Great Britain)
+2026-08-01 22:15:35 | INFO     | MantraAI | TextToSpeech initialised.
+2026-08-01 22:15:36 | INFO     | MantraAI | SpeechToText initialised.
+2026-08-01 22:15:36 | INFO     | MantraAI | Speaking: 'Hello! I'm Mantra, version 1.0. Please wait while I calibrate my microphone.'
+2026-08-01 22:15:44 | INFO     | MantraAI | Calibrating microphone for ambient noise…
+2026-08-01 22:15:45 | INFO     | MantraAI | Calibration complete.
+2026-08-01 22:15:45 | INFO     | MantraAI | WakeWordDetector ready. Wake word: 'hello mantra'
+2026-08-01 22:15:45 | INFO     | MantraAI | Wake word listener active – waiting for wake word…
+2026-08-01 22:15:45 | INFO     | MantraAI | Wake word detector started.
+2026-08-01 22:15:45 | INFO     | MantraAI | Assistant initialised. All modules loaded.
+2026-08-01 22:15:45 | INFO     | MantraAI | Speaking: 'I'm ready. Say 'Hello Mantra' to wake me up.'
+2026-08-01 22:15:58 | INFO     | MantraAI | Interrupt signal received. Exiting.
+2026-08-01 22:15:58 | INFO     | MantraAI | Wake word detector stopped.
+2026-08-01 22:15:58 | INFO     | MantraAI | Speaking: 'Goodbye! Mantra is shutting down.'
+2026-08-01 22:16:02 | INFO     | MantraAI.main | MantraAI shutdown complete.
+2026-08-01 22:16:02 | INFO     | MantraAI.main | MantraAI shutdown complete.
+2026-08-01 22:18:31 | INFO     | MantraAI | TTS voice set to: Microsoft Hazel Desktop - English (Great Britain)
+2026-08-01 22:18:31 | INFO     | MantraAI | TextToSpeech initialised.
+2026-08-01 22:18:31 | INFO     | MantraAI | SpeechToText initialised.
+2026-08-01 22:18:31 | INFO     | MantraAI | Speaking: 'Hello! I'm Mantra, version 1.0. Please wait while I calibrate my microphone.'
+2026-08-01 22:18:39 | INFO     | MantraAI | Calibrating microphone for ambient noise…
+2026-08-01 22:18:40 | INFO     | MantraAI | Calibration complete.
+2026-08-01 22:18:41 | INFO     | MantraAI | WakeWordDetector ready. Wake word: 'hello mantra'
+2026-08-01 22:18:41 | INFO     | MantraAI | Wake word listener active – waiting for wake word…
+2026-08-01 22:18:41 | INFO     | MantraAI | Wake word detector started.
+2026-08-01 22:18:41 | INFO     | MantraAI | Assistant initialised. All modules loaded.
+2026-08-01 22:18:41 | INFO     | MantraAI | Speaking: 'I'm ready. Say 'Hello Mantra' to wake me up.'
+2026-08-01 22:19:22 | INFO     | MantraAI | Interrupt signal received. Exiting.
+2026-08-01 22:19:22 | INFO     | MantraAI | Wake word detector stopped.
+2026-08-01 22:19:22 | INFO     | MantraAI | Speaking: 'Goodbye! Mantra is shutting down.'
+2026-08-01 22:19:26 | INFO     | MantraAI.main | MantraAI shutdown complete.
+2026-08-01 22:19:26 | INFO     | MantraAI.main | MantraAI shutdown complete.
+2026-08-01 22:25:14 | INFO     | MantraAI | TTS voice set to: Microsoft Hazel Desktop - English (Great Britain)
+2026-08-01 22:25:14 | INFO     | MantraAI | TextToSpeech initialised.
+2026-08-01 22:25:14 | INFO     | MantraAI | SpeechToText initialised.
+2026-08-01 22:25:14 | INFO     | MantraAI | Speaking: 'Hello! I'm Mantra, version 1.0. Please wait while I calibrate my microphone.'
+2026-08-01 22:25:22 | INFO     | MantraAI | Calibrating microphone for ambient noise…
+2026-08-01 22:25:24 | INFO     | MantraAI | Calibration complete.
+2026-08-01 22:25:24 | INFO     | MantraAI | WakeWordDetector ready. Wake word: 'hello mantra'
+2026-08-01 22:25:24 | INFO     | MantraAI | Wake word listener active – waiting for wake word…
+2026-08-01 22:25:24 | INFO     | MantraAI | Wake word detector started.
+2026-08-01 22:25:24 | INFO     | MantraAI | Assistant initialised. All modules loaded.
+2026-08-01 22:25:24 | INFO     | MantraAI | Speaking: 'I'm ready. Say 'Hello Mantra' to wake me up.'
+2026-08-01 22:25:24 | DEBUG    | MantraAI | Wake listener heard: 'pata chale ki meri duniya'
+2026-08-01 22:25:39 | DEBUG    | MantraAI | Wake listener heard: 'hello mantra good evening'
+2026-08-01 22:25:39 | INFO     | MantraAI | Wake word detected!
+2026-08-01 22:25:39 | INFO     | MantraAI.main | Wake word event received. Starting session.
+2026-08-01 22:25:39 | INFO     | MantraAI.main | Wake word event received. Starting session.
+2026-08-01 22:25:39 | INFO     | MantraAI | Speaking: 'Hello! I'm Mantra. How can I help you?'
+2026-08-01 22:25:39 | DEBUG    | MantraAI | Wake listener heard: 'hello mantra good evening'
+2026-08-01 22:25:39 | INFO     | MantraAI | Wake word detected!
+2026-08-01 22:25:39 | INFO     | MantraAI.main | Wake word event received. Starting session.
+2026-08-01 22:25:39 | INFO     | MantraAI.main | Wake word event received. Starting session.
+2026-08-01 22:25:39 | INFO     | MantraAI | Speaking: 'Hello! I'm Mantra. How can I help you?'
+2026-08-01 22:25:44 | INFO     | MantraAI | Awaiting command…
+2026-08-01 22:25:44 | DEBUG    | MantraAI | Listening…
+2026-08-01 22:25:49 | INFO     | MantraAI | Awaiting command…
+2026-08-01 22:25:49 | DEBUG    | MantraAI | Listening…
+2026-08-01 22:25:53 | DEBUG    | MantraAI | STT could not understand audio.
+2026-08-01 22:25:53 | INFO     | MantraAI | Speaking: 'I didn't catch that. Could you repeat?'
+2026-08-01 22:25:53 | DEBUG    | MantraAI | STT could not understand audio.
+2026-08-01 22:25:53 | INFO     | MantraAI | Speaking: 'I didn't catch that. Could you repeat?'
+2026-08-01 22:25:56 | DEBUG    | MantraAI | Listening…
+2026-08-01 22:26:00 | DEBUG    | MantraAI | Listening…
+2026-08-01 22:26:01 | DEBUG    | MantraAI | STT could not understand audio.
+2026-08-01 22:26:01 | INFO     | MantraAI | Speaking: 'Going back to sleep. Say Hello Mantra when you need me!'
+2026-08-01 22:26:05 | INFO     | MantraAI | Session ended.
+2026-08-01 22:26:17 | DEBUG    | MantraAI | STT could not understand audio.
+2026-08-01 22:26:17 | INFO     | MantraAI | Speaking: 'Going back to sleep. Say Hello Mantra when you need me!'
+2026-08-01 22:26:21 | INFO     | MantraAI | Session ended.
+2026-08-01 22:26:46 | DEBUG    | MantraAI | Wake listener heard: 'mobile data connect'
+2026-08-01 22:26:46 | DEBUG    | MantraAI | Wake listener heard: 'mobile data connect'
+2026-08-01 22:28:14 | ERROR    | MantraAI | Wake word STT request error: recognition connection failed: [WinError 10065] A socket operation was attempted to an unreachable host
+2026-08-01 22:28:14 | ERROR    | MantraAI | Wake word STT request error: recognition connection failed: [WinError 10065] A socket operation was attempted to an unreachable host
+2026-08-01 22:28:18 | ERROR    | MantraAI | Wake word STT request error: recognition connection failed: [Errno 11001] getaddrinfo failed
+2026-08-01 22:28:18 | ERROR    | MantraAI | Wake word STT request error: recognition connection failed: [Errno 11001] getaddrinfo failed
+2026-08-01 22:28:24 | ERROR    | MantraAI | Wake word STT request error: recognition connection failed: [Errno 11001] getaddrinfo failed
+2026-08-01 22:28:24 | ERROR    | MantraAI | Wake word STT request error: recognition connection failed: [Errno 11001] getaddrinfo failed
+2026-08-01 22:28:43 | INFO     | MantraAI | Interrupt signal received. Exiting.
+2026-08-01 22:28:43 | INFO     | MantraAI | Wake word detector stopped.
+2026-08-01 22:28:43 | INFO     | MantraAI | Speaking: 'Goodbye! Mantra is shutting down.'
+2026-08-01 22:28:47 | INFO     | MantraAI.main | MantraAI shutdown complete.
+2026-08-01 22:28:47 | INFO     | MantraAI.main | MantraAI shutdown complete.
+2026-08-01 22:29:31 | INFO     | MantraAI | TTS voice set to: Microsoft Hazel Desktop - English (Great Britain)
+2026-08-01 22:29:31 | INFO     | MantraAI | TextToSpeech initialised.
+2026-08-01 22:29:31 | INFO     | MantraAI | SpeechToText initialised.
+2026-08-01 22:29:31 | INFO     | MantraAI | Speaking: 'Hello! I'm Mantra, version 1.0. Please wait while I calibrate my microphone.'
+2026-08-01 22:29:39 | INFO     | MantraAI | Calibrating microphone for ambient noise…
+2026-08-01 22:29:40 | INFO     | MantraAI | Calibration complete.
+2026-08-01 22:29:40 | INFO     | MantraAI | WakeWordDetector ready. Wake word: 'hello mantra'
+2026-08-01 22:29:40 | INFO     | MantraAI | Wake word listener active – waiting for wake word…
+2026-08-01 22:29:40 | INFO     | MantraAI | Wake word detector started.
+2026-08-01 22:29:40 | INFO     | MantraAI | Assistant initialised. All modules loaded.
+2026-08-01 22:29:40 | INFO     | MantraAI | Speaking: 'I'm ready. Say 'Hello Mantra' to wake me up.'
+2026-08-01 22:30:05 | DEBUG    | MantraAI | Wake listener heard: 'hello'
+2026-08-01 22:30:05 | DEBUG    | MantraAI | Wake listener heard: 'hello'
+2026-08-01 22:30:26 | INFO     | MantraAI | Interrupt signal received. Exiting.
+2026-08-01 22:30:26 | INFO     | MantraAI | Wake word detector stopped.
+2026-08-01 22:30:26 | INFO     | MantraAI | Speaking: 'Goodbye! Mantra is shutting down.'
+2026-08-01 22:30:30 | INFO     | MantraAI.main | MantraAI shutdown complete.
+2026-08-01 22:30:30 | INFO     | MantraAI.main | MantraAI shutdown complete.
+2026-08-01 22:30:36 | DEBUG    | MantraAI | Wake listener heard: 'sexy'
+2026-08-01 22:30:43 | INFO     | MantraAI | TTS voice set to: Microsoft Hazel Desktop - English (Great Britain)
+2026-08-01 22:30:43 | INFO     | MantraAI | TextToSpeech initialised.
+2026-08-01 22:30:43 | INFO     | MantraAI | SpeechToText initialised.
+2026-08-01 22:30:43 | INFO     | MantraAI | Speaking: 'Hello! I'm Mantra, version 1.0. Please wait while I calibrate my microphone.'
+2026-08-01 22:30:51 | INFO     | MantraAI | Calibrating microphone for ambient noise…
+2026-08-01 22:30:53 | INFO     | MantraAI | Calibration complete.
+2026-08-01 22:30:53 | INFO     | MantraAI | WakeWordDetector ready. Wake word: 'hello mantra'
+2026-08-01 22:30:53 | INFO     | MantraAI | Wake word listener active – waiting for wake word…
+2026-08-01 22:30:53 | INFO     | MantraAI | Wake word detector started.
+2026-08-01 22:30:53 | INFO     | MantraAI | Assistant initialised. All modules loaded.
+2026-08-01 22:30:53 | INFO     | MantraAI | Speaking: 'I'm ready. Say 'Hello Mantra' to wake me up.'
+2026-08-01 22:30:58 | INFO     | MantraAI | Interrupt signal received. Exiting.
+2026-08-01 22:30:58 | INFO     | MantraAI | Wake word detector stopped.
+2026-08-01 22:30:58 | INFO     | MantraAI | Speaking: 'Goodbye! Mantra is shutting down.'
+2026-08-01 22:30:59 | DEBUG    | MantraAI | Wake listener heard: 'kya'
+2026-08-01 22:31:02 | INFO     | MantraAI.main | MantraAI shutdown complete.
+2026-08-01 22:31:02 | INFO     | MantraAI.main | MantraAI shutdown complete.
+2026-08-01 22:31:24 | INFO     | MantraAI | TTS voice set to: Microsoft Hazel Desktop - English (Great Britain)
+2026-08-01 22:31:24 | INFO     | MantraAI | TextToSpeech initialised.
+2026-08-01 22:31:25 | INFO     | MantraAI | SpeechToText initialised.
+2026-08-01 22:31:25 | INFO     | MantraAI | Speaking: 'Hello! I'm Mantra, version 1.0. Please wait while I calibrate my microphone.'
+2026-08-01 22:31:33 | INFO     | MantraAI | Calibrating microphone for ambient noise…
+2026-08-01 22:31:34 | INFO     | MantraAI | Calibration complete.
+2026-08-01 22:31:34 | INFO     | MantraAI | WakeWordDetector ready. Wake word: 'hello mantra'
+2026-08-01 22:31:34 | INFO     | MantraAI | Wake word listener active – waiting for wake word…
+2026-08-01 22:31:34 | INFO     | MantraAI | Wake word detector started.
+2026-08-01 22:31:34 | INFO     | MantraAI | Assistant initialised. All modules loaded.
+2026-08-01 22:31:34 | INFO     | MantraAI | Speaking: 'I'm ready. Say 'Hello Mantra' to wake me up.'
+2026-08-01 22:33:17 | DEBUG    | MantraAI | Wake listener heard: 'majak nahin'
+2026-08-01 22:33:17 | DEBUG    | MantraAI | Wake listener heard: 'majak nahin'
+2026-08-01 22:33:51 | DEBUG    | MantraAI | Wake listener heard: 'english'
+2026-08-01 22:34:39 | INFO     | MantraAI | Interrupt signal received. Exiting.
+2026-08-01 22:34:39 | INFO     | MantraAI | Wake word detector stopped.
+2026-08-01 22:34:39 | INFO     | MantraAI | Speaking: 'Goodbye! Mantra is shutting down.'
+2026-08-01 22:34:43 | INFO     | MantraAI.main | MantraAI shutdown complete.
+2026-08-01 22:34:43 | INFO     | MantraAI.main | MantraAI shutdown complete.
+2026-08-01 22:35:12 | INFO     | MantraAI | TTS voice set to: Microsoft Hazel Desktop - English (Great Britain)
+2026-08-01 22:35:12 | INFO     | MantraAI | TextToSpeech initialised.
+2026-08-01 22:35:12 | INFO     | MantraAI | SpeechToText initialised.
+2026-08-01 22:35:12 | INFO     | MantraAI | Speaking: 'Hello! I'm Mantra, version 1.0. Please wait while I calibrate my microphone.'
+2026-08-01 22:35:20 | INFO     | MantraAI | Calibrating microphone for ambient noise…
+2026-08-01 22:35:22 | INFO     | MantraAI | Calibration complete.
+2026-08-01 22:35:22 | INFO     | MantraAI | WakeWordDetector ready. Wake word: 'hello mantra'
+2026-08-01 22:35:22 | INFO     | MantraAI | Wake word listener active – waiting for wake word…
+2026-08-01 22:35:22 | INFO     | MantraAI | Wake word detector started.
+2026-08-01 22:35:22 | INFO     | MantraAI | Assistant initialised. All modules loaded.
+2026-08-01 22:35:22 | INFO     | MantraAI | Speaking: 'I'm ready. Say 'Hello Mantra' to wake me up.'
+2026-08-01 22:35:29 | INFO     | MantraAI | Interrupt signal received. Exiting.
+2026-08-01 22:35:29 | INFO     | MantraAI | Wake word detector stopped.
+2026-08-01 22:35:29 | INFO     | MantraAI | Speaking: 'Goodbye! Mantra is shutting down.'
+2026-08-01 22:35:33 | INFO     | MantraAI.main | MantraAI shutdown complete.
+2026-08-01 22:35:33 | INFO     | MantraAI.main | MantraAI shutdown complete.
+2026-08-01 22:35:49 | INFO     | MantraAI | TTS voice set to: Microsoft Hazel Desktop - English (Great Britain)
+2026-08-01 22:35:49 | INFO     | MantraAI | TextToSpeech initialised.
+2026-08-01 22:35:50 | INFO     | MantraAI | SpeechToText initialised.
+2026-08-01 22:35:50 | INFO     | MantraAI | Speaking: 'Hello! I'm Mantra, version 1.0. Please wait while I calibrate my microphone.'
+2026-08-01 22:35:58 | INFO     | MantraAI | Interrupt signal received. Exiting.
+2026-08-01 22:35:58 | INFO     | MantraAI | Calibrating microphone for ambient noise…
+2026-08-01 22:36:00 | INFO     | MantraAI | Calibration complete.
+2026-08-01 22:36:00 | INFO     | MantraAI | WakeWordDetector ready. Wake word: 'hello mantra'
+2026-08-01 22:36:00 | INFO     | MantraAI | Wake word listener active – waiting for wake word…
+2026-08-01 22:36:00 | INFO     | MantraAI | Wake word detector started.
+2026-08-01 22:36:00 | INFO     | MantraAI | Assistant initialised. All modules loaded.
+2026-08-01 22:36:00 | INFO     | MantraAI | Speaking: 'I'm ready. Say 'Hello Mantra' to wake me up.'
+2026-08-01 22:36:04 | INFO     | MantraAI | Wake word detector stopped.
+2026-08-01 22:36:04 | INFO     | MantraAI | Speaking: 'Goodbye! Mantra is shutting down.'
+2026-08-01 22:36:08 | INFO     | MantraAI.main | MantraAI shutdown complete.
+2026-08-01 22:36:08 | INFO     | MantraAI.main | MantraAI shutdown complete.
+2026-08-01 22:36:45 | INFO     | MantraAI | TTS voice set to: Microsoft Hazel Desktop - English (Great Britain)
+2026-08-01 22:36:45 | INFO     | MantraAI | TextToSpeech initialised.
+2026-08-01 22:36:46 | INFO     | MantraAI | SpeechToText initialised.
+2026-08-01 22:36:46 | INFO     | MantraAI | Speaking: 'Hello! I'm Mantra, version 1.0. Please wait while I calibrate my microphone.'
+2026-08-01 22:36:54 | INFO     | MantraAI | Calibrating microphone for ambient noise…
+2026-08-01 22:36:56 | INFO     | MantraAI | Calibration complete.
+2026-08-01 22:36:56 | INFO     | MantraAI | WakeWordDetector ready. Wake word: 'hello mantra'
+2026-08-01 22:36:56 | INFO     | MantraAI | Wake word listener active – waiting for wake word…
+2026-08-01 22:36:56 | INFO     | MantraAI | Wake word detector started.
+2026-08-01 22:36:56 | INFO     | MantraAI | Assistant initialised. All modules loaded.
+2026-08-01 22:36:56 | INFO     | MantraAI | Speaking: 'I'm ready. Say 'Hello Mantra' to wake me up.'
+2026-08-01 22:39:16 | DEBUG    | MantraAI | Wake listener heard: 'call'
+2026-08-02 11:48:37 | INFO     | MantraAI | TTS voice set to: Microsoft Hazel Desktop - English (Great Britain)
+2026-08-02 11:48:37 | INFO     | MantraAI | TextToSpeech initialised.
+2026-08-02 11:48:37 | INFO     | MantraAI | SpeechToText initialised.
+2026-08-02 11:48:37 | INFO     | MantraAI | Speaking: 'Hello! I'm Mantra, version 1.0. Please wait while I calibrate my microphone.'
+2026-08-02 11:48:46 | INFO     | MantraAI | Calibrating microphone for ambient noise…
+2026-08-02 11:48:47 | INFO     | MantraAI | Calibration complete.
+2026-08-02 11:48:47 | INFO     | MantraAI | WakeWordDetector ready. Wake word: 'hello mantra'
+2026-08-02 11:48:47 | INFO     | MantraAI | Wake word listener active – waiting for wake word…
+2026-08-02 11:48:47 | INFO     | MantraAI | Wake word detector started.
+2026-08-02 11:48:47 | INFO     | MantraAI | Assistant initialised. All modules loaded.
+2026-08-02 11:48:47 | INFO     | MantraAI | Speaking: 'I'm ready. Say 'Hello Mantra' to wake me up.'
+2026-08-02 11:48:52 | ERROR    | MantraAI | Wake word STT request error: recognition connection failed: [Errno 11001] getaddrinfo failed
+2026-08-02 11:48:54 | ERROR    | MantraAI | Wake word STT request error: recognition connection failed: [Errno 11001] getaddrinfo failed
+2026-08-02 11:49:01 | ERROR    | MantraAI | Wake word STT request error: recognition connection failed: [Errno 11001] getaddrinfo failed
+2026-08-02 11:49:03 | ERROR    | MantraAI | Wake word STT request error: recognition connection failed: [Errno 11001] getaddrinfo failed
+2026-08-02 11:49:06 | ERROR    | MantraAI | Wake word STT request error: recognition connection failed: [Errno 11001] getaddrinfo failed
+2026-08-02 11:49:08 | ERROR    | MantraAI | Wake word STT request error: recognition connection failed: [Errno 11001] getaddrinfo failed
+2026-08-02 11:49:14 | ERROR    | MantraAI | Wake word STT request error: recognition connection failed: [Errno 11001] getaddrinfo failed
+2026-08-02 11:49:17 | ERROR    | MantraAI | Wake word STT request error: recognition connection failed: [Errno 11001] getaddrinfo failed
+2026-08-02 11:49:20 | ERROR    | MantraAI | Wake word STT request error: recognition connection failed: [Errno 11001] getaddrinfo failed
+2026-08-02 11:49:24 | ERROR    | MantraAI | Wake word STT request error: recognition connection failed: [Errno 11001] getaddrinfo failed
+2026-08-02 11:49:26 | ERROR    | MantraAI | Wake word STT request error: recognition connection failed: [Errno 11001] getaddrinfo failed
+2026-08-02 11:49:29 | ERROR    | MantraAI | Wake word STT request error: recognition connection failed: [Errno 11001] getaddrinfo failed
+2026-08-02 11:49:32 | ERROR    | MantraAI | Wake word STT request error: recognition connection failed: [Errno 11001] getaddrinfo failed
+2026-08-02 11:49:35 | ERROR    | MantraAI | Wake word STT request error: recognition connection failed: [Errno 11001] getaddrinfo failed
+2026-08-02 11:49:38 | ERROR    | MantraAI | Wake word STT request error: recognition connection failed: [Errno 11001] getaddrinfo failed
+2026-08-02 11:49:40 | ERROR    | MantraAI | Wake word STT request error: recognition connection failed: [Errno 11001] getaddrinfo failed
+2026-08-02 11:49:43 | ERROR    | MantraAI | Wake word STT request error: recognition connection failed: [Errno 11001] getaddrinfo failed
+2026-08-02 11:49:45 | ERROR    | MantraAI | Wake word STT request error: recognition connection failed: [Errno 11001] getaddrinfo failed
+2026-08-02 11:49:48 | ERROR    | MantraAI | Wake word STT request error: recognition connection failed: [Errno 11001] getaddrinfo failed
+2026-08-02 11:49:51 | ERROR    | MantraAI | Wake word STT request error: recognition connection failed: [Errno 11001] getaddrinfo failed
+2026-08-02 11:49:54 | ERROR    | MantraAI | Wake word STT request error: recognition connection failed: [Errno 11001] getaddrinfo failed
+2026-08-02 11:49:57 | ERROR    | MantraAI | Wake word STT request error: recognition connection failed: [Errno 11001] getaddrinfo failed
+2026-08-02 11:50:04 | ERROR    | MantraAI | Wake word STT request error: recognition connection failed: [Errno 11001] getaddrinfo failed
+2026-08-02 11:50:08 | ERROR    | MantraAI | Wake word STT request error: recognition connection failed: [Errno 11001] getaddrinfo failed
+2026-08-02 11:50:10 | ERROR    | MantraAI | Wake word STT request error: recognition connection failed: [Errno 11001] getaddrinfo failed
+2026-08-02 11:50:13 | ERROR    | MantraAI | Wake word STT request error: recognition connection failed: [Errno 11001] getaddrinfo failed
+2026-08-02 11:50:15 | ERROR    | MantraAI | Wake word STT request error: recognition connection failed: [Errno 11001] getaddrinfo failed
+2026-08-02 11:50:18 | ERROR    | MantraAI | Wake word STT request error: recognition connection failed: [Errno 11001] getaddrinfo failed
+2026-08-02 11:53:32 | INFO     | MantraAI | TTS voice set to: Microsoft Hazel Desktop - English (Great Britain)
+2026-08-02 11:53:32 | INFO     | MantraAI | TextToSpeech initialised.
+2026-08-02 11:53:33 | INFO     | MantraAI | SpeechToText initialised.
+2026-08-02 11:53:33 | INFO     | MantraAI | Speaking: 'Hello! I'm Mantra, version 1.0. Please wait while I calibrate my microphone.'
+2026-08-02 11:53:41 | INFO     | MantraAI | Calibrating microphone for ambient noise…
+2026-08-02 11:53:43 | INFO     | MantraAI | Calibration complete.
+2026-08-02 11:53:43 | INFO     | MantraAI | WakeWordDetector ready. Wake word: 'hello mantra'
+2026-08-02 11:53:43 | INFO     | MantraAI | Wake word listener active – waiting for wake word…
+2026-08-02 11:53:43 | INFO     | MantraAI | Wake word detector started.
+2026-08-02 11:53:43 | INFO     | MantraAI | Assistant initialised. All modules loaded.
+2026-08-02 11:53:43 | INFO     | MantraAI | Speaking: 'I'm ready. Say 'Hello Mantra' to wake me up.'
+2026-08-02 11:57:06 | INFO     | MantraAI | Interrupt signal received. Exiting.
+2026-08-02 11:57:06 | INFO     | MantraAI | Wake word detector stopped.
+2026-08-02 11:57:06 | INFO     | MantraAI | Speaking: 'Goodbye! Mantra is shutting down.'
+2026-08-02 11:57:10 | INFO     | MantraAI.main | MantraAI shutdown complete.
+2026-08-02 11:57:10 | INFO     | MantraAI.main | MantraAI shutdown complete.
+2026-08-02 11:57:24 | INFO     | MantraAI | TTS voice set to: Microsoft Hazel Desktop - English (Great Britain)
+2026-08-02 11:57:24 | INFO     | MantraAI | TextToSpeech initialised.
+2026-08-02 11:57:25 | INFO     | MantraAI | SpeechToText initialised.
+2026-08-02 11:57:25 | INFO     | MantraAI | Speaking: 'Hello! I'm Mantra, version 1.0. Please wait while I calibrate my microphone.'
+2026-08-02 11:57:33 | INFO     | MantraAI | Calibrating microphone for ambient noise…
+2026-08-02 11:57:35 | INFO     | MantraAI | Calibration complete.
+2026-08-02 11:57:35 | INFO     | MantraAI | WakeWordDetector ready. Wake word: 'hello mantra'
+2026-08-02 11:57:35 | INFO     | MantraAI | Wake word listener active – waiting for wake word…
+2026-08-02 11:57:35 | INFO     | MantraAI | Wake word detector started.
+2026-08-02 11:57:35 | INFO     | MantraAI | Assistant initialised. All modules loaded.
+2026-08-02 11:57:35 | INFO     | MantraAI | Speaking: 'I'm ready. Say 'Hello Mantra' to wake me up.'
+2026-08-02 11:58:43 | DEBUG    | MantraAI | Wake listener heard: 'mantra'
+2026-08-02 11:58:55 | INFO     | MantraAI | Interrupt signal received. Exiting.
+2026-08-02 11:58:55 | INFO     | MantraAI | Wake word detector stopped.
+2026-08-02 11:58:55 | INFO     | MantraAI | Speaking: 'Goodbye! Mantra is shutting down.'
+2026-08-02 11:58:59 | INFO     | MantraAI.main | MantraAI shutdown complete.
+2026-08-02 11:58:59 | INFO     | MantraAI.main | MantraAI shutdown complete.
+2026-08-02 11:59:05 | INFO     | MantraAI | TTS voice set to: Microsoft Hazel Desktop - English (Great Britain)
+2026-08-02 11:59:05 | INFO     | MantraAI | TextToSpeech initialised.
+2026-08-02 11:59:06 | INFO     | MantraAI | SpeechToText initialised.
+2026-08-02 11:59:06 | INFO     | MantraAI | Speaking: 'Hello! I'm Mantra, version 1.0. Please wait while I calibrate my microphone.'
+2026-08-02 11:59:14 | INFO     | MantraAI | Calibrating microphone for ambient noise…
+2026-08-02 11:59:16 | INFO     | MantraAI | Calibration complete.
+2026-08-02 11:59:16 | INFO     | MantraAI | WakeWordDetector ready. Wake word: 'hello mantra'
+2026-08-02 11:59:16 | INFO     | MantraAI | Wake word listener active – waiting for wake word…
+2026-08-02 11:59:16 | INFO     | MantraAI | Wake word detector started.
+2026-08-02 11:59:16 | INFO     | MantraAI | Assistant initialised. All modules loaded.
+2026-08-02 11:59:16 | INFO     | MantraAI | Speaking: 'I'm ready. Say 'Hello Mantra' to wake me up.'
+2026-08-02 11:59:54 | DEBUG    | MantraAI | Wake listener heard: 'hello mantra'
+2026-08-02 11:59:54 | INFO     | MantraAI | Wake word detected!
+2026-08-02 11:59:54 | INFO     | MantraAI.main | Wake word event received. Starting session.
+2026-08-02 11:59:54 | INFO     | MantraAI.main | Wake word event received. Starting session.
+2026-08-02 11:59:54 | INFO     | MantraAI | Speaking: 'Hello! I'm Mantra. How can I help you?'
+2026-08-02 11:59:59 | INFO     | MantraAI | Awaiting command…
+2026-08-02 11:59:59 | DEBUG    | MantraAI | Listening…
+2026-08-02 12:00:03 | DEBUG    | MantraAI | STT could not understand audio.
+2026-08-02 12:00:03 | INFO     | MantraAI | Speaking: 'I didn't catch that. Could you repeat?'
+2026-08-02 12:00:07 | DEBUG    | MantraAI | Listening…
+2026-08-02 12:00:13 | INFO     | MantraAI | Recognised: 'what can you do'
+2026-08-02 12:00:13 | INFO     | MantraAI | Handling command: 'what can you do'
+2026-08-02 12:00:13 | INFO     | MantraAI | Speaking: 'I can open apps like Chrome, VS Code, and Spotify. I can search the web, control your system volume, manage files, save notes, tell you the weather, read the news, and answer questions. Just ask!'
+2026-08-02 12:00:29 | INFO     | MantraAI | Awaiting command…
+2026-08-02 12:00:29 | DEBUG    | MantraAI | Listening…
+2026-08-02 12:00:33 | INFO     | MantraAI | Recognised: 'open Chrome'
+2026-08-02 12:00:33 | INFO     | MantraAI | Handling command: 'open chrome'
+2026-08-02 12:00:33 | INFO     | MantraAI | Opened: chrome (C:\Program Files\Google\Chrome\Application\chrome.exe)
+2026-08-02 12:00:33 | INFO     | MantraAI | Speaking: 'Opening chrome.'
+2026-08-02 12:00:35 | INFO     | MantraAI | Awaiting command…
+2026-08-02 12:00:35 | DEBUG    | MantraAI | Listening…
+2026-08-02 12:00:40 | INFO     | MantraAI | Recognised: 'Naushad the PW'
+2026-08-02 12:00:40 | INFO     | MantraAI | Handling command: 'naushad the pw'
+2026-08-02 12:00:40 | INFO     | MantraAI | Speaking: 'I'm not sure how to help with that. Could you rephrase, or ask me something else?'
+2026-08-02 12:00:47 | INFO     | MantraAI | Awaiting command…
+2026-08-02 12:00:47 | DEBUG    | MantraAI | Listening…
+2026-08-02 12:00:51 | INFO     | MantraAI | Recognised: 'open vs code'
+2026-08-02 12:00:51 | INFO     | MantraAI | Handling command: 'open vs code'
+2026-08-02 12:00:52 | INFO     | MantraAI | Opened: vscode (C:\Users\91816\AppData\Local\Programs\Microsoft VS Code\Code.exe)
+2026-08-02 12:00:52 | INFO     | MantraAI | Speaking: 'Opening vs code.'
+2026-08-02 12:00:54 | INFO     | MantraAI | Awaiting command…
+2026-08-02 12:00:54 | DEBUG    | MantraAI | Listening…
+2026-08-02 12:00:58 | DEBUG    | MantraAI | STT could not understand audio.
+2026-08-02 12:00:58 | INFO     | MantraAI | Speaking: 'I didn't catch that. Could you repeat?'
+2026-08-02 12:01:03 | DEBUG    | MantraAI | Listening…
+2026-08-02 12:01:09 | DEBUG    | MantraAI | STT could not understand audio.
+2026-08-02 12:01:09 | INFO     | MantraAI | Speaking: 'Going back to sleep. Say Hello Mantra when you need me!'
+2026-08-02 12:01:14 | INFO     | MantraAI | Session ended.
+2026-08-02 12:01:21 | INFO     | MantraAI | Interrupt signal received. Exiting.
+2026-08-02 12:01:21 | INFO     | MantraAI | Wake word detector stopped.
+2026-08-02 12:01:21 | INFO     | MantraAI | Speaking: 'Goodbye! Mantra is shutting down.'
+2026-08-02 12:01:22 | DEBUG    | MantraAI | Wake listener heard: 'chori chori'
+2026-08-02 12:01:25 | INFO     | MantraAI.main | MantraAI shutdown complete.
+2026-08-02 12:01:25 | INFO     | MantraAI.main | MantraAI shutdown complete.
+2026-08-02 12:18:46 | INFO     | MantraAI | Browser module ready. 4 bookmarks loaded.
+2026-08-02 12:18:46 | INFO     | MantraAI | Screen module ready. Screenshots: C:\Users\91816\Pictures\MantraScreenshots, Recordings: C:\Users\91816\Videos\MantraRecordings
+2026-08-02 12:18:46 | INFO     | MantraAI | Opened: vscode (C:\Users\91816\AppData\Local\Programs\Microsoft VS Code\Code.exe)
+2026-08-02 12:18:46 | INFO     | MantraAI | Opened: excel (C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE)
+2026-08-02 12:18:46 | INFO     | MantraAI | File search 'config': 5 result(s).
+2026-08-02 12:18:46 | INFO     | MantraAI | Brightness up: 46% -> 56%
+2026-08-02 12:18:46 | INFO     | MantraAI | Volume up: 100% -> 100%
+2026-08-02 12:18:46 | ERROR    | MantraAI | New tab error: PyAutoGUI fail-safe triggered from mouse moving to a corner of the screen. To disable this fail-safe, set pyautogui.FAILSAFE to False. DISABLING FAIL-SAFE IS NOT RECOMMENDED.
+2026-08-02 12:18:46 | INFO     | MantraAI | Clipboard cleared.
+2026-08-02 12:18:46 | INFO     | MantraAI | Screenshot saved: C:\Users\91816\Pictures\MantraScreenshots\screenshot_20260802_121846.png
+2026-08-02 12:18:46 | INFO     | MantraAI | Screen recording started: C:\Users\91816\Videos\MantraRecordings\recording_20260802_121846.mp4
+2026-08-02 12:19:18 | INFO     | MantraAI | Opened: vscode (C:\Users\91816\AppData\Local\Programs\Microsoft VS Code\Code.exe)
+2026-08-02 12:19:18 | INFO     | MantraAI | Opened: excel (C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE)
+2026-08-02 12:19:19 | ERROR    | MantraAI | Minimize all error: PyAutoGUI fail-safe triggered from mouse moving to a corner of the screen. To disable this fail-safe, set pyautogui.FAILSAFE to False. DISABLING FAIL-SAFE IS NOT RECOMMENDED.
+2026-08-02 12:23:01 | INFO     | MantraAI | Browser module ready. 4 bookmarks loaded.
+2026-08-02 12:23:01 | INFO     | MantraAI | Screen module ready. Screenshots: C:\Users\91816\Pictures\MantraScreenshots, Recordings: C:\Users\91816\Videos\MantraRecordings
+2026-08-02 12:23:01 | INFO     | MantraAI | Opened: vscode (C:\Users\91816\AppData\Local\Programs\Microsoft VS Code\Code.exe)
+2026-08-02 12:23:01 | ERROR    | MantraAI | App not found at path: C:\Users\91816\AppData\Roaming\Spotify\Spotify.exe
+2026-08-02 12:23:02 | INFO     | MantraAI | Opened: excel (C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE)
+2026-08-02 12:23:02 | INFO     | MantraAI | Opened: powerpoint (C:\Program Files\Microsoft Office\root\Office16\POWERPNT.EXE)
+2026-08-02 12:23:02 | ERROR    | MantraAI | Minimize all error: PyAutoGUI fail-safe triggered from mouse moving to a corner of the screen. To disable this fail-safe, set pyautogui.FAILSAFE to False. DISABLING FAIL-SAFE IS NOT RECOMMENDED.
+2026-08-02 12:23:02 | INFO     | MantraAI | Closed 13 instance(s) of chrome.
+2026-08-02 12:23:02 | INFO     | MantraAI | File search 'config': 5 result(s).
+2026-08-02 12:24:44 | INFO     | MantraAI | TTS voice set to: Microsoft Hazel Desktop - English (Great Britain)
+2026-08-02 12:24:44 | INFO     | MantraAI | TextToSpeech initialised.
+2026-08-02 12:24:44 | INFO     | MantraAI | SpeechToText initialised.
+2026-08-02 12:24:44 | INFO     | MantraAI | Speaking: 'Hello! I'm Mantra, version 2.0. Please wait while I calibrate my microphone.'
+2026-08-02 12:24:53 | INFO     | MantraAI | Calibrating microphone for ambient noise…
+2026-08-02 12:24:54 | INFO     | MantraAI | Calibration complete.
+2026-08-02 12:24:55 | INFO     | MantraAI | WakeWordDetector ready. Wake word: 'hello mantra'
+2026-08-02 12:24:55 | INFO     | MantraAI | Wake word listener active – waiting for wake word…
+2026-08-02 12:24:55 | INFO     | MantraAI | Wake word detector started.
+2026-08-02 12:24:55 | INFO     | MantraAI | Browser module ready. 4 bookmarks loaded.
+2026-08-02 12:24:55 | INFO     | MantraAI | Screen module ready. Screenshots: C:\Users\91816\Pictures\MantraScreenshots, Recordings: C:\Users\91816\Videos\MantraRecordings
+2026-08-02 12:24:55 | INFO     | MantraAI | Assistant v2.0 initialised. All modules loaded.
+2026-08-02 12:24:55 | INFO     | MantraAI | Speaking: 'I'm ready. Say 'Hello Mantra' to wake me up.'
+2026-08-02 12:26:08 | INFO     | MantraAI | Folder search 'mantra': 3 result(s).
+2026-08-02 12:26:08 | INFO     | MantraAI | Created folder: C:\Users\91816\Desktop\testv2
+2026-08-02 12:26:08 | ERROR    | MantraAI | Open dir error: [WinError 2] The system cannot find the file specified: 'C:\\Users\\91816\\Downloads'
+2026-08-02 12:26:08 | INFO     | MantraAI | Brightness up: 56% -> 66%
+2026-08-02 12:26:08 | INFO     | MantraAI | Brightness down: 66% -> 56%
+2026-08-02 12:26:08 | INFO     | MantraAI | Volume up: 100% -> 100%
+2026-08-02 12:26:09 | INFO     | MantraAI | System muted.
+2026-08-02 12:26:09 | INFO     | MantraAI | Locking computer.
+2026-08-02 12:26:09 | ERROR    | MantraAI | New tab error: PyAutoGUI fail-safe triggered from mouse moving to a corner of the screen. To disable this fail-safe, set pyautogui.FAILSAFE to False. DISABLING FAIL-SAFE IS NOT RECOMMENDED.
+2026-08-02 12:26:09 | ERROR    | MantraAI | Close tab error: PyAutoGUI fail-safe triggered from mouse moving to a corner of the screen. To disable this fail-safe, set pyautogui.FAILSAFE to False. DISABLING FAIL-SAFE IS NOT RECOMMENDED.
+2026-08-02 12:26:09 | INFO     | MantraAI | Google search: 'python'
+2026-08-02 12:26:09 | INFO     | MantraAI | Opened shortcut: github -> https://github.com
+2026-08-02 12:26:10 | ERROR    | MantraAI | Clipboard clear error: Error calling OpenClipboard ([WinError 0] The operation completed successfully.)
+2026-08-02 12:26:10 | ERROR    | MantraAI | Clipboard paste error: Error calling OpenClipboard ([WinError 0] The operation completed successfully.)
+2026-08-02 12:26:10 | ERROR    | MantraAI | Clipboard copy error: PyAutoGUI fail-safe triggered from mouse moving to a corner of the screen. To disable this fail-safe, set pyautogui.FAILSAFE to False. DISABLING FAIL-SAFE IS NOT RECOMMENDED.
+2026-08-02 12:26:10 | INFO     | MantraAI | Screenshot saved: C:\Users\91816\Pictures\MantraScreenshots\screenshot_20260802_122610.png
+2026-08-02 12:26:10 | INFO     | MantraAI | Screen recording started: C:\Users\91816\Videos\MantraRecordings\recording_20260802_122610.mp4
+2026-08-02 12:26:10 | INFO     | MantraAI | Recording saved: C:\Users\91816\Videos\MantraRecordings\recording_20260802_122610.mp4 (0 KB)
+2026-08-02 12:26:10 | INFO     | MantraAI | Screen recording stopped.
+2026-08-02 12:27:57 | INFO     | MantraAI | Interrupt signal received. Exiting.
+2026-08-02 12:27:57 | INFO     | MantraAI | Wake word detector stopped.
+2026-08-02 12:27:57 | INFO     | MantraAI | Speaking: 'Goodbye! Mantra is shutting down.'
+2026-08-02 12:28:01 | INFO     | MantraAI.main | MantraAI shutdown complete.
+2026-08-02 12:28:01 | INFO     | MantraAI.main | MantraAI shutdown complete.
+2026-08-02 12:28:07 | INFO     | MantraAI | TTS voice set to: Microsoft Hazel Desktop - English (Great Britain)
+2026-08-02 12:28:07 | INFO     | MantraAI | TextToSpeech initialised.
+2026-08-02 12:28:08 | INFO     | MantraAI | SpeechToText initialised.
+2026-08-02 12:28:08 | INFO     | MantraAI | Speaking: 'Hello! I'm Mantra, version 2.0. Please wait while I calibrate my microphone.'
+2026-08-02 12:28:16 | INFO     | MantraAI | Calibrating microphone for ambient noise…
+2026-08-02 12:28:18 | INFO     | MantraAI | Calibration complete.
+2026-08-02 12:28:18 | INFO     | MantraAI | WakeWordDetector ready. Wake word: 'hello mantra'
+2026-08-02 12:28:18 | INFO     | MantraAI | Wake word listener active – waiting for wake word…
+2026-08-02 12:28:18 | INFO     | MantraAI | Wake word detector started.
+2026-08-02 12:28:18 | INFO     | MantraAI | Browser module ready. 4 bookmarks loaded.
+2026-08-02 12:28:18 | INFO     | MantraAI | Screen module ready. Screenshots: C:\Users\91816\Pictures\MantraScreenshots, Recordings: C:\Users\91816\Videos\MantraRecordings
+2026-08-02 12:28:18 | INFO     | MantraAI | Assistant v2.0 initialised. All modules loaded.
+2026-08-02 12:28:18 | INFO     | MantraAI | Speaking: 'I'm ready. Say 'Hello Mantra' to wake me up.'
+2026-08-02 12:28:26 | DEBUG    | MantraAI | Wake listener heard: 'hello hello'
+2026-08-02 12:29:13 | DEBUG    | MantraAI | Wake listener heard: 'hello mantra'
+2026-08-02 12:29:13 | INFO     | MantraAI | Wake word detected!
+2026-08-02 12:29:13 | INFO     | MantraAI.main | Wake word event received. Starting session.
+2026-08-02 12:29:13 | INFO     | MantraAI.main | Wake word event received. Starting session.
+2026-08-02 12:29:13 | INFO     | MantraAI | Speaking: 'Hello! I'm Mantra version 2.0. How can I help you?'
+2026-08-02 12:29:20 | INFO     | MantraAI | Awaiting command...
+2026-08-02 12:29:20 | DEBUG    | MantraAI | Listening…
+2026-08-02 12:29:24 | DEBUG    | MantraAI | STT could not understand audio.
+2026-08-02 12:29:24 | INFO     | MantraAI | Speaking: 'I didn't catch that. Could you repeat?'
+2026-08-02 12:29:28 | DEBUG    | MantraAI | Listening…
+2026-08-02 12:29:32 | DEBUG    | MantraAI | STT could not understand audio.
+2026-08-02 12:29:32 | INFO     | MantraAI | Speaking: 'Going back to sleep. Say 'Hello Mantra' when you need me!'
+2026-08-02 12:29:37 | INFO     | MantraAI | Session ended.
+2026-08-02 12:32:44 | INFO     | MantraAI | TTS voice set to: Microsoft Hazel Desktop - English (Great Britain)
+2026-08-02 12:32:44 | INFO     | MantraAI | TextToSpeech initialised.
+2026-08-02 12:32:45 | INFO     | MantraAI | SpeechToText initialised.
+2026-08-02 12:32:45 | INFO     | MantraAI | Speaking: 'Hello! I'm Mantra, version 2.0. Please wait while I calibrate my microphone.'
+2026-08-02 12:32:53 | INFO     | MantraAI | Calibrating microphone for ambient noise…
+2026-08-02 12:32:55 | INFO     | MantraAI | Calibration complete.
+2026-08-02 12:32:55 | INFO     | MantraAI | WakeWordDetector ready. Wake word: 'hello mantra'
+2026-08-02 12:32:55 | INFO     | MantraAI | Wake word listener active – waiting for wake word…
+2026-08-02 12:32:55 | INFO     | MantraAI | Wake word detector started.
+2026-08-02 12:32:55 | INFO     | MantraAI | Browser module ready. 4 bookmarks loaded.
+2026-08-02 12:32:55 | INFO     | MantraAI | Screen module ready. Screenshots: C:\Users\91816\Pictures\MantraScreenshots, Recordings: C:\Users\91816\Videos\MantraRecordings
+2026-08-02 12:32:55 | INFO     | MantraAI | Assistant v2.0 initialised. All modules loaded.
+2026-08-02 12:32:55 | INFO     | MantraAI | Speaking: 'I'm ready. Say 'Hello Mantra' to wake me up.'
+2026-08-02 12:33:14 | DEBUG    | MantraAI | Wake listener heard: 'hello mantra'
+2026-08-02 12:33:14 | INFO     | MantraAI | Wake word detected!
+2026-08-02 12:33:14 | INFO     | MantraAI.main | Wake word event received. Starting session.
+2026-08-02 12:33:14 | INFO     | MantraAI.main | Wake word event received. Starting session.
+2026-08-02 12:33:14 | INFO     | MantraAI | Speaking: 'Hello! I'm Mantra version 2.0. How can I help you?'
+2026-08-02 12:33:21 | INFO     | MantraAI | Awaiting command...
+2026-08-02 12:33:21 | DEBUG    | MantraAI | Listening…
+2026-08-02 12:33:36 | DEBUG    | MantraAI | STT could not understand audio.
+2026-08-02 12:33:36 | INFO     | MantraAI | Speaking: 'I didn't catch that. Could you repeat?'
+2026-08-02 12:33:40 | DEBUG    | MantraAI | Listening…
+2026-08-02 12:33:45 | DEBUG    | MantraAI | STT could not understand audio.
+2026-08-02 12:33:45 | INFO     | MantraAI | Speaking: 'Going back to sleep. Say 'Hello Mantra' when you need me!'
+2026-08-02 12:33:50 | INFO     | MantraAI | Session ended.
+2026-08-02 12:33:50 | INFO     | MantraAI | Interrupt signal received. Exiting.
+2026-08-02 12:33:50 | INFO     | MantraAI | Wake word detector stopped.
+2026-08-02 12:33:50 | INFO     | MantraAI | Speaking: 'Goodbye! Mantra is shutting down.'
+2026-08-02 12:33:54 | INFO     | MantraAI.main | MantraAI shutdown complete.
+2026-08-02 12:33:54 | INFO     | MantraAI.main | MantraAI shutdown complete.
+2026-08-02 12:37:54 | INFO     | MantraAI | SpeechToText initialised. Sample rate: 16000 Hz | Energy threshold: 200 | Pause threshold: 1.2s | Normalize: True
+2026-08-02 12:38:28 | INFO     | MantraAI | TTS voice set to: Microsoft Hazel Desktop - English (Great Britain)
+2026-08-02 12:38:28 | INFO     | MantraAI | TextToSpeech initialised.
+2026-08-02 12:38:28 | INFO     | MantraAI | SpeechToText initialised. Sample rate: 16000 Hz | Energy threshold: 200 | Pause threshold: 1.2s | Normalize: True
+2026-08-02 12:38:28 | INFO     | MantraAI | Speaking: 'Hello! I'm Mantra, version 2.0. Please wait while I calibrate my microphone.'
+2026-08-02 12:38:37 | INFO     | MantraAI | Calibrating microphone for 2.0s (noise suppression)...
+2026-08-02 12:38:39 | INFO     | MantraAI | Calibration complete. Auto-set energy threshold: 165
+2026-08-02 12:38:39 | INFO     | MantraAI | WakeWordDetector ready. Wake word: 'hello mantra'
+2026-08-02 12:38:39 | INFO     | MantraAI | Wake word listener active – waiting for wake word…
+2026-08-02 12:38:39 | INFO     | MantraAI | Wake word detector started.
+2026-08-02 12:38:39 | INFO     | MantraAI | Browser module ready. 4 bookmarks loaded.
+2026-08-02 12:38:39 | INFO     | MantraAI | Screen module ready. Screenshots: C:\Users\91816\Pictures\MantraScreenshots, Recordings: C:\Users\91816\Videos\MantraRecordings
+2026-08-02 12:38:39 | INFO     | MantraAI | Assistant v2.0 initialised. All modules loaded.
+2026-08-02 12:38:39 | INFO     | MantraAI | Speaking: 'I'm ready. Say 'Hello Mantra' to wake me up.'
+2026-08-02 12:38:56 | DEBUG    | MantraAI | Wake listener heard: 'yah tumhari baat nahin sun rahi fir se bolo jor se bolo'
+2026-08-02 12:39:09 | DEBUG    | MantraAI | Wake listener heard: 'maheshwari maheshwari'
+2026-08-02 12:39:22 | DEBUG    | MantraAI | Wake listener heard: 'kis baat ka khoj mahsus'
+2026-08-02 12:39:29 | DEBUG    | MantraAI | Wake listener heard: 'isi baat ka bahut'
+2026-08-02 12:39:34 | INFO     | MantraAI | Interrupt signal received. Exiting.
+2026-08-02 12:39:34 | INFO     | MantraAI | Wake word detector stopped.
+2026-08-02 12:39:34 | INFO     | MantraAI | Speaking: 'Goodbye! Mantra is shutting down.'
+2026-08-02 12:39:37 | INFO     | MantraAI.main | MantraAI shutdown complete.
+2026-08-02 12:39:37 | INFO     | MantraAI.main | MantraAI shutdown complete.
+2026-08-02 12:54:55 | INFO     | MantraAI | Conversation module ready. Language: hinglish | Max history: 10 turns
+2026-08-02 12:55:37 | INFO     | MantraAI | TTS voice set to: Microsoft Hazel Desktop - English (Great Britain)
+2026-08-02 12:55:37 | INFO     | MantraAI | TextToSpeech initialised.
+2026-08-02 12:55:37 | INFO     | MantraAI | SpeechToText initialised. Sample rate: 16000 Hz | Energy threshold: 200 | Pause threshold: 1.2s | Normalize: True
+2026-08-02 12:55:37 | INFO     | MantraAI | Speaking: 'Namaste! Main hoon Mantra, version 2.0. Microphone calibrate ho rahi hai, ek second ruko.'
+2026-08-02 12:55:47 | INFO     | MantraAI | Calibrating microphone for 2.0s (noise suppression)...
+2026-08-02 12:55:49 | INFO     | MantraAI | Calibration complete. Auto-set energy threshold: 2603
+2026-08-02 12:55:49 | INFO     | MantraAI | WakeWordDetector ready. Wake word: 'hello mantra'
+2026-08-02 12:55:49 | INFO     | MantraAI | Wake word listener active – waiting for wake word…
+2026-08-02 12:55:49 | INFO     | MantraAI | Wake word detector started.
+2026-08-02 12:55:49 | INFO     | MantraAI | Conversation module ready. Language: hinglish | Max history: 10 turns
+2026-08-02 12:55:49 | INFO     | MantraAI | Browser module ready. 4 bookmarks loaded.
+2026-08-02 12:55:49 | INFO     | MantraAI | Screen module ready. Screenshots: C:\Users\91816\Pictures\MantraScreenshots, Recordings: C:\Users\91816\Videos\MantraRecordings
+2026-08-02 12:55:49 | INFO     | MantraAI | Assistant v2.0 initialised. All modules loaded.
+2026-08-02 12:55:49 | INFO     | MantraAI | Speaking: 'I'm ready. Say 'Hello Mantra' to wake me up.'
+2026-08-02 12:56:23 | DEBUG    | MantraAI | Wake listener heard: 'hello mantra'
+2026-08-02 12:56:23 | INFO     | MantraAI | Wake word detected!
+2026-08-02 12:56:23 | INFO     | MantraAI.main | Wake word event received. Starting session.
+2026-08-02 12:56:23 | INFO     | MantraAI.main | Wake word event received. Starting session.
+2026-08-02 12:56:23 | DEBUG    | MantraAI | Conversation history cleared.
+2026-08-02 12:56:23 | INFO     | MantraAI | Speaking: 'Hello! Main hoon Mantra version 2.0. Batao, kya kaam hai?'
+2026-08-02 12:56:30 | INFO     | MantraAI | Awaiting command...
+2026-08-02 12:56:31 | DEBUG    | MantraAI | Listening...
+2026-08-02 12:56:45 | DEBUG    | MantraAI | Audio captured: 356 KB, sample_rate=16000 Hz
+2026-08-02 12:56:45 | DEBUG    | MantraAI | Audio normalized: RMS 1561 → 3000 (gain 1.92x)
+2026-08-02 12:56:47 | INFO     | MantraAI | Recognised: 'Chrome open karo'
+2026-08-02 12:56:47 | INFO     | MantraAI | Handling command: 'chrome open karo'
+2026-08-02 12:56:47 | INFO     | MantraAI | Opened: chrome (C:\Program Files\Google\Chrome\Application\chrome.exe)
+2026-08-02 12:56:47 | INFO     | MantraAI | Speaking: 'Opening chrome.'
+2026-08-02 12:56:49 | INFO     | MantraAI | Awaiting command...
+2026-08-02 12:56:50 | DEBUG    | MantraAI | Listening...
+2026-08-02 12:56:52 | DEBUG    | MantraAI | Audio captured: 86 KB, sample_rate=16000 Hz
+2026-08-02 12:56:52 | DEBUG    | MantraAI | Audio normalized: RMS 2463 → 3000 (gain 1.22x)
+2026-08-02 12:56:53 | INFO     | MantraAI | Recognised: 'code open karo'
+2026-08-02 12:56:53 | INFO     | MantraAI | Handling command: 'code open karo'
+2026-08-02 12:56:53 | INFO     | MantraAI | Opened: vscode (C:\Users\91816\AppData\Local\Programs\Microsoft VS Code\Code.exe)
+2026-08-02 12:56:53 | INFO     | MantraAI | Speaking: 'Opening code.'
+2026-08-02 12:56:55 | INFO     | MantraAI | Awaiting command...
+2026-08-02 12:56:56 | DEBUG    | MantraAI | Listening...
+2026-08-02 12:57:05 | DEBUG    | MantraAI | Audio captured: 308 KB, sample_rate=16000 Hz
+2026-08-02 12:57:06 | DEBUG    | MantraAI | Audio normalized: RMS 3350 → 3000 (gain 0.90x)
+2026-08-02 12:57:08 | INFO     | MantraAI | Recognised: 'theek hai ab kya vs code mein tum search karte ho search kar sakte ho particular file'
+2026-08-02 12:57:08 | INFO     | MantraAI | Handling command: 'theek hai ab kya vs code mein tum search karte ho search kar sakte ho particular file'
+2026-08-02 12:57:08 | INFO     | MantraAI | Speaking: 'Yeh mujhe samajh nahi aaya. Kya aap phir se bata sakte hain?'
+2026-08-02 12:57:14 | INFO     | MantraAI | Awaiting command...
+2026-08-02 12:57:14 | DEBUG    | MantraAI | Listening...
+2026-08-02 12:57:21 | DEBUG    | MantraAI | Audio captured: 146 KB, sample_rate=16000 Hz
+2026-08-02 12:57:21 | DEBUG    | MantraAI | Audio normalized: RMS 2597 → 3000 (gain 1.16x)
+2026-08-02 12:57:23 | INFO     | MantraAI | Recognised: 'what can you do in Hindi'
+2026-08-02 12:57:23 | INFO     | MantraAI | Handling command: 'what can you do in hindi'
+2026-08-02 12:57:23 | INFO     | MantraAI | Speaking: 'Main hoon Mantra version 2.0, aapka Windows desktop assistant. Main koi bhi app open, close, minimize ya maximize kar sakta hoon. Files dhundhna, banana, rename, copy ya delete karna mujhe pata hai. Volume aur brightness control, screenshot, screen recording, aur clipboard bhi handle karta hoon. Browser mein websites open karna, Google aur YouTube search, aur bookmarks bhi. Weather, news, Wikipedia, notes, aur koi bhi sawaal, sab ke liye ready hoon. Bas boliye!'
+2026-08-02 12:58:02 | INFO     | MantraAI | Awaiting command...
+2026-08-02 12:58:03 | DEBUG    | MantraAI | Listening...
+2026-08-02 12:58:09 | DEBUG    | MantraAI | Audio captured: 192 KB, sample_rate=16000 Hz
+2026-08-02 12:58:09 | DEBUG    | MantraAI | Audio normalized: RMS 1947 → 3000 (gain 1.54x)
+2026-08-02 12:58:12 | INFO     | MantraAI | Recognised: 'screenshot this screen'
+2026-08-02 12:58:12 | INFO     | MantraAI | Handling command: 'screenshot this screen'
+2026-08-02 12:58:12 | INFO     | MantraAI | Screenshot saved: C:\Users\91816\Pictures\MantraScreenshots\screenshot_20260802_125812.png
+2026-08-02 12:58:12 | INFO     | MantraAI | Speaking: 'Screenshot saved as screenshot_20260802_125812.png.'
+2026-08-02 12:58:21 | INFO     | MantraAI | Awaiting command...
+2026-08-02 12:58:21 | DEBUG    | MantraAI | Listening...
+2026-08-02 12:58:25 | DEBUG    | MantraAI | Audio captured: 116 KB, sample_rate=16000 Hz
+2026-08-02 12:58:25 | DEBUG    | MantraAI | Audio normalized: RMS 253 → 1518 (gain 6.00x)
+2026-08-02 12:58:27 | DEBUG    | MantraAI | STT could not understand audio.
+2026-08-02 12:58:27 | INFO     | MantraAI | Speaking: 'Kuch sunai nahi diya. Ek baar phir bologe?'
+2026-08-02 12:58:32 | DEBUG    | MantraAI | Listening...
+2026-08-02 12:58:38 | DEBUG    | MantraAI | Audio captured: 192 KB, sample_rate=16000 Hz
+2026-08-02 12:58:38 | DEBUG    | MantraAI | Audio normalized: RMS 2535 → 3000 (gain 1.18x)
+2026-08-02 12:58:41 | INFO     | MantraAI | Recognised: 'take a screenshot'
+2026-08-02 12:58:41 | INFO     | MantraAI | Handling command: 'take a screenshot'
+2026-08-02 12:58:42 | INFO     | MantraAI | Screenshot saved: C:\Users\91816\Pictures\MantraScreenshots\screenshot_20260802_125841.png
+2026-08-02 12:58:42 | INFO     | MantraAI | Speaking: 'Screenshot saved as screenshot_20260802_125841.png.'
+2026-08-02 12:58:51 | INFO     | MantraAI | Awaiting command...
+2026-08-02 12:58:51 | DEBUG    | MantraAI | Listening...
+2026-08-02 12:58:54 | DEBUG    | MantraAI | Audio captured: 96 KB, sample_rate=16000 Hz
+2026-08-02 12:58:54 | DEBUG    | MantraAI | Audio normalized: RMS 118 → 708 (gain 6.00x)
+2026-08-02 12:58:56 | DEBUG    | MantraAI | STT could not understand audio.
+2026-08-02 12:58:56 | INFO     | MantraAI | Speaking: 'Kuch sunai nahi diya. Ek baar phir bologe?'
+2026-08-02 12:59:01 | DEBUG    | MantraAI | Listening...
+2026-08-02 12:59:08 | DEBUG    | MantraAI | Audio captured: 132 KB, sample_rate=16000 Hz
+2026-08-02 12:59:08 | DEBUG    | MantraAI | Audio normalized: RMS 78 → 468 (gain 6.00x)
+2026-08-02 12:59:09 | DEBUG    | MantraAI | STT could not understand audio.
+2026-08-02 12:59:09 | INFO     | MantraAI | Speaking: 'Theek hai, main so jata hoon. Jab zaroorat ho, 'Hello Mantra' bolna.'
+2026-08-02 12:59:16 | INFO     | MantraAI | Session ended.
+2026-08-02 12:59:16 | DEBUG    | MantraAI | Conversation history cleared.
+2026-08-02 12:59:28 | DEBUG    | MantraAI | Wake listener heard: 'where screen should you save'
+2026-08-02 12:59:33 | DEBUG    | MantraAI | Wake listener heard: 'screenshot is where you save'
+2026-08-02 12:59:41 | DEBUG    | MantraAI | Wake listener heard: 'hello mantra'
+2026-08-02 12:59:41 | INFO     | MantraAI | Wake word detected!
+2026-08-02 12:59:41 | INFO     | MantraAI.main | Wake word event received. Starting session.
+2026-08-02 12:59:41 | INFO     | MantraAI.main | Wake word event received. Starting session.
+2026-08-02 12:59:41 | DEBUG    | MantraAI | Conversation history cleared.
+2026-08-02 12:59:41 | INFO     | MantraAI | Speaking: 'Hello! Main hoon Mantra version 2.0. Batao, kya kaam hai?'
+2026-08-02 12:59:48 | INFO     | MantraAI | Awaiting command...
+2026-08-02 12:59:48 | DEBUG    | MantraAI | Listening...
+2026-08-02 12:59:56 | DEBUG    | MantraAI | Audio captured: 126 KB, sample_rate=16000 Hz
+2026-08-02 12:59:56 | DEBUG    | MantraAI | Audio normalized: RMS 2532 → 3000 (gain 1.18x)
+2026-08-02 12:59:58 | INFO     | MantraAI | Recognised: 'speak ine English'
+2026-08-02 12:59:58 | INFO     | MantraAI | Handling command: 'speak ine english'
+2026-08-02 12:59:58 | INFO     | MantraAI | Speaking: 'Yeh mujhe samajh nahi aaya. Kya aap phir se bata sakte hain?'

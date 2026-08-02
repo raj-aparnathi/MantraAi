@@ -1,0 +1,49 @@
+# ============================================================
+# Mantra AI v2.0 – Requirements
+# Install: pip install -r requirements.txt
+#
+# NOTE: PyAudio on Windows may need:
+#   pip install pipwin && pipwin install pyaudio
+# ============================================================
+
+# ── Voice ──────────────────────────────────────────────────
+SpeechRecognition==3.17.0
+pyttsx3==2.90
+
+# ── Audio I/O (install via pipwin on Windows if pip fails) ─
+PyAudio==0.2.14
+
+# ── Desktop Automation ─────────────────────────────────────
+pyautogui==0.9.54
+psutil==6.1.1
+keyboard==0.13.5
+pygetwindow==0.0.9
+
+# ── System Volume Control (Windows) ────────────────────────
+pycaw==20240210
+comtypes==1.4.8
+
+# ── Screen Brightness Control ───────────────────────────────
+screen-brightness-control==0.23.0
+
+# ── Screen Capture & Recording ─────────────────────────────
+mss==9.0.2
+opencv-python==4.10.0.84
+Pillow==11.2.1
+
+# ── Clipboard ──────────────────────────────────────────────
+pyperclip==1.9.0
+
+# ── Safe File Deletion (Recycle Bin) ───────────────────────
+send2trash==1.8.3
+
+# ── Browser ────────────────────────────────────────────────
+# webbrowser is built-in
+
+# ── Internet Services ───────────────────────────────────────
+requests==2.32.3
+wikipedia==1.4.0
+
+# ── Utilities (all built-in to Python 3.12+) ────────────────
+# os, subprocess, datetime, json, threading, pathlib, shutil,
+# logging, socket, time, re, ctypes, signal
