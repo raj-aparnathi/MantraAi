@@ -110,37 +110,37 @@ Mantra AI v3.0 represents a complete architectural evolution from a monolithic s
                                   └──────────────┬─────────────────┘
                                                  │
                         ┌────────────────────────┴────────────────────────┐
-                        ▼                                                 ▼
+                        ▼                                                         ▼
          ┌───────────────────────────────┐                 ┌──────────────────────────────┐
-         │     voice/speech_to_text.py   │                 │   voice/speaker_verify.py    │
-         │  16kHz Mono + Normalization   │                 │   Biometric Authentication   │
+         │     voice/speech_to_text.py        │                 │   voice/speaker_verify.py          │
+         │  16kHz Mono + Normalization        │                 │   Biometric Authentication.        │
          └──────────────┬────────────────┘                 └──────────────────────────────┘
                         │ Spoken Text
                         ▼
          ┌────────────────────────────────────────────────────────────────────────┐
-         │                          agent/agent.py                                │
-         │   Priority 1: Exit / Bye                                               │
-         │   Priority 2: Built-in fast answers (Time, Date, Greetings, Jokes)     │
-         │   Priority 3: Tool Execution (agent/tools.py)                          │
-         │   Priority 4: AI Reasoning Fallback (brain/brain.py)                   │
+         │                          agent/agent.py                                             │
+         │   Priority 1: Exit / Bye                                                            │
+         │   Priority 2: Built-in fast answers (Time, Date, Greetings, Jokes)                  │
+         │   Priority 3: Tool Execution (agent/tools.py)                                       │
+         │   Priority 4: AI Reasoning Fallback (brain/brain.py)                                │
          └──────────────┬──────────────────────────────────────────┬──────────────┘
-                        │                                          │
+                           │                                                │
         ┌───────────────┴───────────────┐          ┌───────────────┴──────────────┐
-        ▼                               ▼          ▼                              ▼
+        ▼                                    ▼         ▼                                   ▼
 ┌───────────────────────────────┐ ┌────────────────────────────────┐ ┌───────────────────────────┐
-│       agent/tools.py          │ │       brain/brain.py           │ │   voice/text_to_speech.py │
-│ ├── apps/open_app.py          │ │ ├── brain/llm_api.py (Gemini)  │ │ SAPI5 / pyttsx3 Engine    │
-│ ├── apps/music_player.py      │ │ └── brain/local_llm.py (Ollama)│ └───────────────────────────┘
-│ ├── system/system_control.py  │ └────────────────────────────────┘
-│ ├── memory/memory.py          │
-│ ├── automation.py             │
-│ ├── file_manager.py           │
-│ ├── browser.py                │
-│ ├── screen.py                 │
-│ ├── clipboard.py              │
-│ ├── notes.py                  │
-│ ├── internet.py               │
-│ └── updater/updater.py        │
+│       agent/tools.py                │ │       brain/brain.py                │ │   voice/text_to_speech.py      │
+│ ├── apps/open_app.py               │ │ ├── brain/llm_api.py (Gemini)       │ │ SAPI5 / pyttsx3 Engine         │
+│ ├── apps/music_player.py           │ │ └── brain/local_llm.py (Ollama).    │ └───────────────────────────┘
+│ ├── system/system_control.py.      │ └────────────────────────────────┘
+│ ├── memory/memory.py               │
+│ ├── automation.py                  │
+│ ├── file_manager.py                │
+│ ├── browser.py                     │
+│ ├── screen.py                      │
+│ ├── clipboard.py                   │
+│ ├── notes.py                       │
+│ ├── internet.py                    │
+│ └── updater/updater.py             │
 └───────────────────────────────┘
 ```
 
