@@ -57,9 +57,9 @@ STT_NORMALIZE_AUDIO   : bool  = _cfg["stt"].get("normalize_audio", True)     # v
 STT_CALIBRATION_DUR   : float = _cfg["stt"].get("calibration_duration", 2.0) # ambient noise window
 
 # ── API Keys ───────────────────────────────────────────────────────────────────
-OPENWEATHER_API_KEY : str = _cfg["api_keys"]["openweathermap"]
-NEWSAPI_KEY         : str = _cfg["api_keys"]["newsapi"]
-GEMINI_API_KEY      : str = _cfg["api_keys"]["gemini"]
+OPENWEATHER_API_KEY : str = os.getenv("OPENWEATHER_API_KEY", _cfg["api_keys"].get("openweathermap", ""))
+NEWSAPI_KEY         : str = os.getenv("NEWSAPI_KEY", _cfg["api_keys"].get("newsapi", ""))
+GEMINI_API_KEY      : str = os.getenv("GEMINI_API_KEY", _cfg["api_keys"].get("gemini", ""))
 
 # ── Weather ───────────────────────────────────────────────────────────────────
 DEFAULT_CITY  : str = _cfg["weather"]["default_city"]
@@ -67,6 +67,9 @@ WEATHER_UNITS : str = _cfg["weather"]["units"]
 
 # ── App Paths ──────────────────────────────────────────────────────────────────
 APP_PATHS : dict = _cfg["apps"]
+
+# ── Music ──────────────────────────────────────────────────────────────────────
+MUSIC_DIR : str = _cfg.get("music", {}).get("folder", r"D:\R09\Music")
 
 # ── Logging ───────────────────────────────────────────────────────────────────
 LOG_LEVEL      : str = _cfg["logging"]["level"]
@@ -112,3 +115,22 @@ PERSONA_SYSTEM_PROMPT : str = _persona.get(
 )
 """Full system prompt sent to Gemini API as personality context."""
 
+# ── v3.0: Local LLM (Ollama) ──────────────────────────────────────────────────
+_v3 = _cfg.get("v3", {})
+
+LOCAL_LLM_URL   : str = _v3.get("local_llm_url", "http://localhost:11434")
+"""Ollama server URL. Default is localhost. Change if Ollama runs on another machine."""
+
+LOCAL_LLM_MODEL : str = _v3.get("local_llm_model", "llama3")
+"""Which Ollama model to use as the local LLM fallback (e.g. 'llama3', 'mistral', 'phi3')."""
+
+# ── v3.0: Memory ──────────────────────────────────────────────────────────────
+MEMORY_FILE : str = _v3.get("memory_file", str(DATA_DIR / "memory.json"))
+"""Path to the JSON file used by memory/memory.py to store persistent facts."""
+
+# ── v3.0: Updater ─────────────────────────────────────────────────────────────
+UPDATER_REPO : str = _v3.get(
+    "updater_repo",
+    "https://api.github.com/repos/YourUsername/MantraAI"
+)
+"""GitHub API repo URL for checking updates (set to your actual repo)."""

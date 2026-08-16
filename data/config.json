@@ -3,13 +3,22 @@
     "name": "Mantra",
     "wake_word": "hello mantra",
     "language": "en-US",
-    "version": "2.0",
+    "version": "3.0",
     "timezone": "Asia/Kolkata"
   },
   "tts": {
-    "rate": 175,
+    "engine": "edge-tts",
+    "rate": 0,
     "volume": 1.0,
-    "voice_preference": "female"
+    "pitch": 0,
+    "voice_preference": "female",
+    "voice": "en-US-AriaNeural",
+    "style": "friendly",
+    "style_degree": 1.0,
+    "language": "en-US",
+    "auto_adjust": true,
+    "pause_between_sentences": 0.25,
+    "pause_after_response": 0.5
   },
   "stt": {
     "energy_threshold": 200,
@@ -30,17 +39,20 @@
     "units": "metric"
   },
   "apps": {
-    "chrome":      "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
-    "vscode":      "C:\\Users\\91816\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe",
-    "spotify":     "C:\\Users\\91816\\AppData\\Roaming\\Spotify\\Spotify.exe",
-    "notepad":     "notepad.exe",
-    "calculator":  "calc.exe",
-    "explorer":    "explorer.exe",
-    "word":        "C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE",
-    "excel":       "C:\\Program Files\\Microsoft Office\\root\\Office16\\EXCEL.EXE",
-    "powerpoint":  "C:\\Program Files\\Microsoft Office\\root\\Office16\\POWERPNT.EXE",
-    "teams":       "C:\\Users\\91816\\AppData\\Local\\Microsoft\\Teams\\current\\Teams.exe",
-    "taskmgr":     "taskmgr.exe"
+    "chrome": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+    "vscode": "C:\\Users\\91816\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe",
+    "spotify": "C:\\Users\\91816\\AppData\\Roaming\\Spotify\\Spotify.exe",
+    "notepad": "notepad.exe",
+    "calculator": "calc.exe",
+    "explorer": "explorer.exe",
+    "word": "C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE",
+    "excel": "C:\\Program Files\\Microsoft Office\\root\\Office16\\EXCEL.EXE",
+    "powerpoint": "C:\\Program Files\\Microsoft Office\\root\\Office16\\POWERPNT.EXE",
+    "teams": "C:\\Users\\91816\\AppData\\Local\\Microsoft\\Teams\\current\\Teams.exe",
+    "taskmgr": "taskmgr.exe"
+  },
+  "music": {
+    "folder": "D:\\R09\\Music"
   },
   "logging": {
     "level": "INFO",
@@ -49,8 +61,8 @@
     "backup_count": 3
   },
   "v2": {
-    "screenshots_dir": "",
-    "recordings_dir": "",
+    "screenshots_dir": "D:\\R09\\Pictures\\Screenshots",
+    "recordings_dir": "D:\\R09\\Videos\\Screen Recordings",
     "volume_step": 0.1,
     "brightness_step": 10,
     "bookmarks": {
@@ -59,6 +71,12 @@
       "calendar": "https://calendar.google.com",
       "drive": "https://drive.google.com"
     }
+  },
+  "v3": {
+    "local_llm_url": "http://localhost:11434",
+    "local_llm_model": "llama3",
+    "memory_file": "",
+    "updater_repo": "https://github.com/raj-aparnathi/MantraAi.git"
   },
   "persona": {
     "default_language": "hinglish",

@@ -1,7 +1,12 @@
 """
-wake_word.py – Mantra AI v1.0
+voice/wake_word.py – Mantra AI v3.0
+─────────────────────────────────────
 Background thread that continuously listens for the wake word "Hello Mantra".
 Signals the main assistant loop via a threading.Event.
+
+Location : voice/wake_word.py
+Talks to  : config.py (WAKE_WORD, STT settings), utils.py (logging)
+Used by   : main.py
 
 Threading model:
   detected    – set by detector when wake word heard; cleared by main loop
@@ -11,21 +16,10 @@ Threading model:
 
 import threading
 import time
-import socket
 import speech_recognition as sr
 
 import config
 from utils import log
-
-
-def _is_network_available(host: str = "8.8.8.8", port: int = 53, timeout: float = 2.0) -> bool:
-    """Quick DNS/TCP probe to check internet connectivity before attempting STT."""
-    try:
-        socket.setdefaulttimeout(timeout)
-        socket.socket(socket.AF_INET, socket.SOCK_STREAM).connect((host, port))
-        return True
-    except OSError:
-        return False
 
 
 class WakeWordDetector:
@@ -127,13 +121,7 @@ class WakeWordDetector:
                 if self._paused.is_set() or self._stop_evt.is_set():
                     continue
 
-                # Quick network probe before calling the cloud API
-                if not _is_network_available():
-                    log.warning("Wake word STT: no internet connection – backing off.")
-                    self._backoff_until = time.monotonic() + self._backoff_delay
-                    self._backoff_delay = min(self._backoff_delay * 2, 30.0)
-                    continue
-
+                # Directly call STT - network errors are handled in except sr.RequestError
                 text = self.recognizer.recognize_google(
                     audio, language=config.LANGUAGE
                 ).lower().strip()
@@ -167,6 +155,7 @@ class WakeWordDetector:
 
 
 # ── Quick self-test ────────────────────────────────────────────────────────────
+# To test:  python voice/wake_word.py
 if __name__ == "__main__":
     print(f"Say '{config.WAKE_WORD}' to test…")
     wwd = WakeWordDetector()

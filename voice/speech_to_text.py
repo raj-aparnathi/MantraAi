@@ -1,6 +1,11 @@
 """
-speech_to_text.py – Mantra AI v2.0
+voice/speech_to_text.py – Mantra AI v3.0
+──────────────────────────────────────────
 Microphone capture and speech recognition using Google's free STT backend.
+
+Location : voice/speech_to_text.py
+Talks to  : config.py (settings), utils.py (logging)
+Used by   : agent/agent.py
 
 v2.0 Audio Improvements:
   - 16 kHz sample rate, mono channel (better STT accuracy, less data)
@@ -12,7 +17,6 @@ v2.0 Audio Improvements:
   - Longer listen timeout (more time to start speaking)
   - Audio volume normalization before sending to Google STT
   - Noise suppression via extended ambient calibration
-  - Echo cancellation hint via non-input_device_index auto-selection
 """
 
 import audioop
@@ -66,7 +70,7 @@ def _normalize_audio(audio: sr.AudioData, target_rms: int = 3000) -> sr.AudioDat
 
 class SpeechToText:
     """
-    v2.0 SpeechToText with enhanced microphone sensitivity and audio quality.
+    v3.0 SpeechToText — moved to voice/speech_to_text.py.
 
     Key settings (all tunable via config.json → stt section):
       - sample_rate    : 16000 Hz (optimal for Google STT)
@@ -195,6 +199,7 @@ class SpeechToText:
 
 
 # ── Quick self-test ────────────────────────────────────────────────────────────
+# To test:  python voice/speech_to_text.py
 if __name__ == "__main__":
     stt = SpeechToText()
     stt.calibrate(duration=2.0)

@@ -1,6 +1,14 @@
 """
-main.py – Mantra AI v2.0
-Entry point. Starts the wake word detector and the assistant session loop.
+main.py – Mantra AI v3.0
+──────────────────────────
+Entry point. Starts the wake word detector and the agent session loop.
+
+Architecture:
+  main.py
+    ├→  voice/wake_word.py       → listens for "Hello Mantra"
+    ├→  voice/text_to_speech.py → Mantra speaks
+    ├→  voice/speech_to_text.py → converts your speech to text
+    └→  agent/agent.py          → routes commands to tools or brain
 
 Usage:
     python main.py
@@ -12,10 +20,14 @@ import signal
 
 import config
 from utils import setup_logger, log
-from text_to_speech import TextToSpeech
-from speech_to_text import SpeechToText
-from wake_word      import WakeWordDetector
-from assistant      import Assistant
+
+# v3.0: All voice components now live in the voice/ package
+from voice.text_to_speech import TextToSpeech
+from voice.speech_to_text import SpeechToText
+from voice.wake_word      import WakeWordDetector
+
+# v3.0: The agent now lives in agent/agent.py
+from agent.agent import Agent
 
 
 # ── Graceful Shutdown ──────────────────────────────────────────────────────────
@@ -39,24 +51,27 @@ def main():
     log = setup_logger("MantraAI.main")
 
     print("=" * 60)
-    print(f"  {config.ASSISTANT_NAME} – Version {config.VERSION}  (Desktop Automation Edition)")
+    print(f"  {config.ASSISTANT_NAME} – Version {config.VERSION}  (v3.0 Clean Architecture)")
     print("  Starting up...")
     print("=" * 60)
 
-    # Initialise core components
+    # Initialise core voice components
     tts = TextToSpeech()
     stt = SpeechToText()
 
-    # Calibrate microphone once
-    tts.speak(f"Namaste! Main hoon {config.ASSISTANT_NAME}, version {config.VERSION}. "
-              "Microphone calibrate ho rahi hai, ek second ruko.")
+    # Calibrate microphone once on startup (reduces false positives)
+    tts.speak(
+        f"Hello! I am {config.ASSISTANT_NAME}, version {config.VERSION}. "
+        "Calibrating microphone, please wait a moment."
+    )
     stt.calibrate(duration=config.STT_CALIBRATION_DUR)
 
-    # Wake word detector
+    # Start wake word detector in the background
     wake_detector = WakeWordDetector()
     wake_detector.start()
 
-    assistant = Assistant(tts=tts, stt=stt)
+    # Create the v3.0 agent (replaces assistant.py)
+    agent = Agent(tts=tts, stt=stt)
 
     tts.speak(
         f"I'm ready. Say '{config.WAKE_WORD.title()}' to wake me up."
@@ -66,18 +81,19 @@ def main():
 
     # ── Main wake-word loop ────────────────────────────────────────────────────
     while not _shutdown:
-        # Block until wake word detected (poll every 0.1s)
+        # Wait up to 0.1s for wake word event
         detected = wake_detector.detected.wait(timeout=0.1)
 
         if not detected:
-            continue       # still waiting
+            continue   # still waiting — loop again
 
         log.info("Wake word event received. Starting session.")
         wake_detector.reset()
-        wake_detector.pause()   # stop wake word listening during active session
+        wake_detector.pause()   # stop wake word listening while session is active
 
         try:
-            assistant.run_session()
+            # Run an active voice session (loops until user says goodbye)
+            agent.run_session()
         except Exception as e:
             log.error(f"Session error: {e}", exc_info=True)
             tts.speak("I encountered an error. Please try again.")
@@ -89,7 +105,7 @@ def main():
     # ── Cleanup ────────────────────────────────────────────────────────────────
     wake_detector.stop()
     tts.speak(f"Goodbye! {config.ASSISTANT_NAME} is shutting down.")
-    log.info("MantraAI shutdown complete.")
+    log.info("MantraAI v3.0 shutdown complete.")
     sys.exit(0)
 
 

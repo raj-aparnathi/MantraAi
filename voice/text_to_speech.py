@@ -1,6 +1,11 @@
 """
-text_to_speech.py – Mantra AI v1.0
+voice/text_to_speech.py – Mantra AI v3.0
+─────────────────────────────────────────
 Non-blocking TTS using pyttsx3 with Windows SAPI5 voices.
+
+Location : voice/text_to_speech.py
+Talks to  : config.py (settings), utils.py (logging)
+Used by   : agent/agent.py, main.py
 """
 
 import threading
@@ -90,6 +95,7 @@ class TextToSpeech:
 
 
 # ── Quick self-test ────────────────────────────────────────────────────────────
+# To test:  python voice/text_to_speech.py
 if __name__ == "__main__":
     tts = TextToSpeech()
-    tts.speak("Hello! I am Mantra, your personal AI assistant. How can I help you today?")
+    tts.speak("Hello! I am Mantra version 3. I have been upgraded to a clean architecture!")
