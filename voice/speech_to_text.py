@@ -91,8 +91,8 @@ class SpeechToText:
         self.recognizer.energy_threshold          = config.STT_ENERGY_THRESHOLD
         self.recognizer.dynamic_energy_threshold  = True
         # Aggressive dynamic adjustment – quickly adapts to room noise
-        self.recognizer.dynamic_energy_adjustment_damping    = 0.10  # default 0.15
-        self.recognizer.dynamic_energy_adjustment_multiplier = 1.05  # default 1.0
+        self.recognizer.dynamic_energy_adjustment_damping    = 0.15  # default 0.15
+        self.recognizer.dynamic_energy_adjustment_multiplier = 1.05  #  1.05
 
         # ── Silence / Pause settings ────────────────────────────────────────────
         # Higher pause_threshold = doesn't stop recording on natural pauses
@@ -119,7 +119,7 @@ class SpeechToText:
 
     # ── Calibration ────────────────────────────────────────────────────────────
 
-    def calibrate(self, duration: float = 2.0) -> None:
+    def calibrate(self, duration: float = 1.0) -> None:
         """
         Calibrate to ambient noise.
         Extended duration (2s default) gives more accurate baseline.

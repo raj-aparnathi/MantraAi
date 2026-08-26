@@ -21,13 +21,13 @@
     "pause_after_response": 0.5
   },
   "stt": {
-    "energy_threshold": 200,
-    "pause_threshold": 1.2,
+    "energy_threshold": 100,
+    "pause_threshold": 1.0,
     "timeout": 10,
     "phrase_time_limit": 20,
     "sample_rate": 16000,
     "normalize_audio": true,
-    "calibration_duration": 2.0
+    "calibration_duration": 1.0
   },
   "api_keys": {
     "openweathermap": "",

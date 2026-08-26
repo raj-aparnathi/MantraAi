@@ -17,7 +17,7 @@ import re
 import config
 from utils import log, normalize, contains_any
 
-MUSIC_FOLDER = Path(getattr(config, "MUSIC_DIR", r"D:\R09\Music"))
+MUSIC_FOLDER = Path(getattr(config, "MUSIC_DIR", r"C:\Users\91816\Music"))
 AUDIO_EXTENSIONS = {".mp3", ".wav", ".flac", ".aac", ".m4a", ".ogg"}
 
 

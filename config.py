@@ -69,7 +69,7 @@ WEATHER_UNITS : str = _cfg["weather"]["units"]
 APP_PATHS : dict = _cfg["apps"]
 
 # ── Music ──────────────────────────────────────────────────────────────────────
-MUSIC_DIR : str = _cfg.get("music", {}).get("folder", r"D:\R09\Music")
+MUSIC_DIR : str = _cfg.get("music", {}).get("folder", r"C:\Users\91816\Music")
 
 # ── Logging ───────────────────────────────────────────────────────────────────
 LOG_LEVEL      : str = _cfg["logging"]["level"]
