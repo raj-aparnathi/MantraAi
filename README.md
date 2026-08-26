@@ -11,7 +11,7 @@
 > **Mantra AI v3.0** is an enterprise-grade, voice-controlled AI desktop assistant and automation system built specifically for Windows. Powered by a **Hybrid Dual-LLM Brain** (Google Gemini Cloud + Local Ollama Offline Fallback), persistent cross-session memory, biometric speaker verification, local media control, and full-spectrum desktop automation.
 >
 > 🗣️ **Default Wake Word:** `"Hello Mantra"`  
-> 🌐 **Persona:** Bilingual Natural Hinglish / English Conversational Agent
+> 🌐 **Persona:** Natural English Conversational Agent (English-only input and output)
 
 ---
 
@@ -42,7 +42,7 @@ Mantra AI v3.0 represents a complete architectural evolution from a monolithic s
    - Decoupled voice I/O, intelligence reasoning, and system execution into discrete testable packages.
 
 2. **Dual-Brain Hybrid Intelligence (Online + Offline LLM)**:
-   - **Primary**: Google Gemini API with persistent multi-turn conversational context and Hinglish persona tuning.
+   - **Primary**: Google Gemini API with persistent multi-turn conversational context and English persona tuning.
    - **Offline Fallback**: Seamless automatic handover to local **Ollama** (`llama3`, `mistral`, `phi3`) when offline or on API timeout.
 
 3. **Long-Term Persistent Memory Engine (`memory/memory.py`)**:
@@ -270,18 +270,34 @@ Mantra AI v3.0 centralizes all settings in `data/config.json`:
     "timezone": "Asia/Kolkata"
   },
   "tts": {
+    "engine": "edge-tts",
+    "voice": "en-US-AvaNeural",
     "rate": 0,
+    "pitch": 0,
     "volume": 1.0,
-    "voice_preference": "female"
+    "voice_preference": "female",
+    "english_only": true,
+    "chunk_long_replies": true,
+    "cache_enabled": true
   },
   "stt": {
-    "energy_threshold": 200,
-    "pause_threshold": 1.2,
-    "timeout": 10,
-    "phrase_time_limit": 20,
+    "language": "en-IN",
+    "energy_threshold": 250,
+    "pause_threshold": 0.7,
+    "non_speaking_duration": 0.3,
+    "phrase_threshold": 0.2,
+    "timeout": 6,
+    "phrase_time_limit": 12,
     "sample_rate": 16000,
     "normalize_audio": true,
-    "calibration_duration": 2.0
+    "calibration_duration": 1.0
+  },
+  "wake": {
+    "listen_timeout": 1.5,
+    "phrase_time_limit": 3.0,
+    "min_speech_seconds": 0.35,
+    "fuzzy_threshold": 0.75,
+    "wake_on_name_only": true
   },
   "api_keys": {
     "gemini": "YOUR_GEMINI_API_KEY",
@@ -325,9 +341,9 @@ Mantra AI v3.0 centralizes all settings in `data/config.json`:
     "updater_repo": "https://github.com/raj-aparnathi/MantraAi.git"
   },
   "persona": {
-    "default_language": "hinglish",
+    "default_language": "english",
     "max_history_turns": 10,
-    "system_prompt": "You are MANTRA, an advanced AI assistant designed to communicate naturally, intelligently, and helpfully in Hinglish or English..."
+    "system_prompt": "You are MANTRA, an advanced English-speaking AI voice assistant... Always reply in English only..."
   }
 }
 ```

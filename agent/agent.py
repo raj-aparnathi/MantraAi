@@ -79,6 +79,14 @@ _BYE = [
     f"Goodbye! Say '{config.WAKE_WORD.title()}' whenever you need me.",
 ]
 
+# Short, natural session openers. A quick "yes?" feels far more human than
+# re-introducing itself every time — and it gets to listening ~2 s sooner.
+_SESSION_OPENERS = [
+    "Yes? I'm listening.",
+    "I'm here. What do you need?",
+    "Hey, what can I do for you?",
+]
+
 
 class Agent:
     """
@@ -105,6 +113,21 @@ class Agent:
         log.info("Agent v3.0 initialised. Brain and ToolRegistry ready.")
 
     # ── Public ─────────────────────────────────────────────────────────────────
+
+    def common_phrases(self) -> list[str]:
+        """
+        Stock lines Mantra says over and over. main.py hands these to
+        TextToSpeech.prewarm() so they are cached and play with no delay.
+        """
+        return [
+            *_SESSION_OPENERS,
+            *_BYE,
+            *_GREETINGS,
+            *_HOW_ARE_YOU,
+            *_THANKS,
+            "Sorry, I didn't catch that. Say it again?",
+            "Okay, cancelled.",
+        ]
 
     def speak(self, text: str) -> None:
         """Speak a response aloud and log it."""
@@ -159,32 +182,39 @@ class Agent:
         """
         Active voice session: listen for commands until the user says goodbye.
         Called by main.py after the wake word is detected.
+
+        The microphone is opened once for the whole session (instead of per
+        command), which removes ~0.3 s of device setup from every turn.
         """
         # Reset LLM conversation memory at the start of each new session
         self.brain.reset_history()
 
-        self.speak(
-            f"Hello! I am {config.ASSISTANT_NAME} version {config.VERSION}. "
-            "How can I help you?"
-        )
-        session_active = True
+        # Hold the mic open for the whole session – much snappier per command.
+        self.stt.open_stream()
 
-        while session_active:
-            log.info("Agent: Awaiting command...")
-            text = self.stt.listen_and_recognize()
+        try:
+            self.speak(random.choice(_SESSION_OPENERS))
+            session_active = True
 
-            if text is None:
-                # Nothing heard — give one more chance
-                self.speak("I didn't hear anything. Could you say that again?")
+            while session_active:
+                log.info("Agent: Awaiting command...")
                 text = self.stt.listen_and_recognize()
-                if text is None:
-                    self.speak(
-                        "Alright, going to sleep. "
-                        f"Say '{config.WAKE_WORD.title()}' whenever you need me."
-                    )
-                    break
 
-            session_active = self.handle_command(text)
+                if text is None:
+                    # Nothing heard — give one more chance
+                    self.speak("Sorry, I didn't catch that. Say it again?")
+                    text = self.stt.listen_and_recognize()
+                    if text is None:
+                        self.speak(
+                            "Okay, I'll go back to sleep. "
+                            f"Just say '{config.WAKE_WORD.title()}' when you need me."
+                        )
+                        break
+
+                session_active = self.handle_command(text)
+        finally:
+            # Always release the mic so the wake word detector can re-arm.
+            self.stt.close_stream()
 
         # Clear LLM history at session end (don't leak memory between sessions)
         self.brain.reset_history()

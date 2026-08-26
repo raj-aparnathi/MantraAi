@@ -62,19 +62,25 @@ def main():
     # Calibrate microphone once on startup (reduces false positives)
     tts.speak(
         f"Hello! I am {config.ASSISTANT_NAME}, version {config.VERSION}. "
-        "Calibrating microphone, please wait a moment."
+        "Calibrating the microphone, one moment."
     )
     stt.calibrate(duration=config.STT_CALIBRATION_DUR)
 
-    # Start wake word detector in the background
-    wake_detector = WakeWordDetector()
+    # Start wake word detector in the background. Reuse the threshold we just
+    # calibrated so it doesn't spend another second calibrating on its own.
+    wake_detector = WakeWordDetector(
+        energy_threshold=stt.recognizer.energy_threshold
+    )
     wake_detector.start()
 
     # Create the v3.0 agent (replaces assistant.py)
     agent = Agent(tts=tts, stt=stt)
 
+    # Cache the stock phrases in the background so they play instantly later.
+    tts.prewarm(agent.common_phrases())
+
     tts.speak(
-        f"I'm ready. Say '{config.WAKE_WORD.title()}' to wake me up."
+        f"I'm ready. Just say '{config.WAKE_WORD.title()}' whenever you need me."
     )
     print(f"\n[Mantra] Listening for wake word: '{config.WAKE_WORD}' …")
     print("[Mantra] Press Ctrl+C to exit.\n")
@@ -89,7 +95,9 @@ def main():
 
         log.info("Wake word event received. Starting session.")
         wake_detector.reset()
-        wake_detector.pause()   # stop wake word listening while session is active
+        # The detector pauses itself on detection; wait for it to confirm the
+        # mic is free before the session grabs it.
+        wake_detector.pause(wait=2.0)
 
         try:
             # Run an active voice session (loops until user says goodbye)

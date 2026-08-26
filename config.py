@@ -43,18 +43,78 @@ VERSION        : str = _cfg["assistant"]["version"]          # "2.0"
 TIMEZONE       : str = _cfg["assistant"].get("timezone", "Asia/Kolkata")  # IST default
 
 # ── TTS ───────────────────────────────────────────────────────────────────────
-TTS_RATE       : int   = _cfg["tts"]["rate"]
-TTS_VOLUME     : float = _cfg["tts"]["volume"]
-TTS_VOICE_PREF : str   = _cfg["tts"]["voice_preference"]    # "female"
+# v3.0: primary engine is edge-tts (neural, human-sounding). rate/pitch are
+# edge-tts relative offsets: rate is a percent (e.g. 0 → "+0%", -10 → "-10%"),
+# pitch is in Hz (e.g. 0 → "+0Hz"). volume (0.0–1.0) is applied at playback.
+TTS_ENGINE       : str   = _cfg["tts"].get("engine", "edge-tts")
+TTS_RATE         : int   = _cfg["tts"].get("rate", 0)
+TTS_PITCH        : int   = int(_cfg["tts"].get("pitch", 0))
+TTS_VOLUME       : float = _cfg["tts"].get("volume", 1.0)
+TTS_VOICE        : str   = _cfg["tts"].get("voice", "en-US-AvaNeural")      # neural voice id
+TTS_VOICE_PREF   : str   = _cfg["tts"].get("voice_preference", "female")   # fallback SAPI pick
+TTS_STYLE        : str   = _cfg["tts"].get("style", "friendly")            # reserved (Azure only)
+TTS_PAUSE_AFTER  : float = float(_cfg["tts"].get("pause_after_response", 0.3))
+TTS_PAUSE_BETWEEN: float = float(_cfg["tts"].get("pause_between_sentences", 0.12))
+
+TTS_ENGLISH_ONLY : bool  = bool(_cfg["tts"].get("english_only", True))
+"""Strip non-English (e.g. Devanagari) script and emoji before speaking."""
+
+TTS_CHUNK_REPLIES: bool  = bool(_cfg["tts"].get("chunk_long_replies", True))
+"""Speak long replies sentence-by-sentence, synthesizing the next chunk while
+the current one plays. Cuts the wait before Mantra starts talking."""
+
+TTS_MAX_CHUNK_CHARS: int = int(_cfg["tts"].get("max_chunk_chars", 240))
+"""Soft upper bound on a single spoken chunk (characters)."""
+
+TTS_CACHE_ENABLED  : bool = bool(_cfg["tts"].get("cache_enabled", True))
+"""Cache synthesized MP3s for repeated stock phrases in data/voice_cache/.
+Each edge-tts call costs ~1–1.5 s of connection setup, so replaying a cached
+greeting is effectively instant."""
+
+TTS_CACHE_MAX_CHARS: int = int(_cfg["tts"].get("cache_max_chars", 200))
+"""Only cache phrases up to this length (LLM replies are unique — don't cache)."""
+
+TTS_CACHE_MAX_FILES: int = int(_cfg["tts"].get("cache_max_files", 400))
+"""Cache size cap. Oldest files are pruned first."""
 
 # ── STT ────────────────────────────────────────────────────────────────
-STT_ENERGY_THRESHOLD  : int   = _cfg["stt"]["energy_threshold"]   # 200 (lower = more sensitive)
-STT_PAUSE_THRESHOLD   : float = _cfg["stt"]["pause_threshold"]    # 1.2 s (longer pauses allowed)
-STT_TIMEOUT           : int   = _cfg["stt"]["timeout"]             # 10 s to start speaking
-STT_PHRASE_TIME_LIMIT : int   = _cfg["stt"]["phrase_time_limit"]   # 20 s max phrase length
+# Recognition locale: 'en-IN' is Google's Indian-English model (best accuracy
+# for Indian-accented English). Use 'en-US' or 'en-GB' if you prefer those.
+STT_LANGUAGE          : str   = _cfg["stt"].get("language", _cfg["assistant"]["language"])
+STT_ENERGY_THRESHOLD  : int   = _cfg["stt"]["energy_threshold"]   # lower = more sensitive
+STT_PAUSE_THRESHOLD   : float = _cfg["stt"]["pause_threshold"]    # silence that ends a phrase
+STT_TIMEOUT           : int   = _cfg["stt"]["timeout"]             # s to wait for speech start
+STT_PHRASE_TIME_LIMIT : int   = _cfg["stt"]["phrase_time_limit"]   # max phrase length
 STT_SAMPLE_RATE       : int   = _cfg["stt"].get("sample_rate", 16000)        # 16 kHz mono
 STT_NORMALIZE_AUDIO   : bool  = _cfg["stt"].get("normalize_audio", True)     # volume normalization
-STT_CALIBRATION_DUR   : float = _cfg["stt"].get("calibration_duration", 2.0) # ambient noise window
+STT_CALIBRATION_DUR   : float = _cfg["stt"].get("calibration_duration", 1.0) # ambient noise window
+
+STT_NON_SPEAKING      : float = float(_cfg["stt"].get("non_speaking_duration", 0.3))
+"""Silence kept around a phrase. Must be <= pause_threshold. Smaller = snappier."""
+
+STT_PHRASE_THRESHOLD  : float = float(_cfg["stt"].get("phrase_threshold", 0.2))
+"""Minimum seconds of speech before it counts as a phrase (catches 'stop', 'yes')."""
+
+# ── Wake Word ─────────────────────────────────────────────────────────────────
+_wake = _cfg.get("wake", {})
+
+WAKE_LISTEN_TIMEOUT   : float = float(_wake.get("listen_timeout", 1.5))
+"""Seconds the wake listener waits for speech before looping (keeps pause snappy)."""
+
+WAKE_PHRASE_LIMIT     : float = float(_wake.get("phrase_time_limit", 3.0))
+"""Max seconds recorded per wake-word attempt. The wake phrase is short."""
+
+WAKE_MIN_SPEECH_SECS  : float = float(_wake.get("min_speech_seconds", 0.35))
+"""Clips shorter than this are dropped locally instead of sent to Google STT."""
+
+WAKE_FUZZY_THRESHOLD  : float = float(_wake.get("fuzzy_threshold", 0.75))
+"""Similarity (0–1) needed to accept a misheard wake word, e.g. 'montra'."""
+
+WAKE_ON_NAME_ONLY     : bool  = bool(_wake.get("wake_on_name_only", True))
+"""Also wake on just the assistant name ('Mantra'), not only 'hello mantra'."""
+
+WAKE_EXTRA_VARIANTS   : list  = list(_wake.get("extra_variants", []))
+"""Extra exact phrases that should also trigger the wake word."""
 
 # ── API Keys ───────────────────────────────────────────────────────────────────
 OPENWEATHER_API_KEY : str = os.getenv("OPENWEATHER_API_KEY", _cfg["api_keys"].get("openweathermap", ""))
@@ -99,8 +159,8 @@ BOOKMARKS : dict = _v2.get("bookmarks", {})
 # ── Persona / System Prompt ────────────────────────────────────────────────────
 _persona = _cfg.get("persona", {})
 
-PERSONA_LANGUAGE    : str = _persona.get("default_language", "hinglish")
-"""Default response language: 'hinglish', 'english', 'hindi'."""
+PERSONA_LANGUAGE    : str = _persona.get("default_language", "english")
+"""Response language. Mantra v3.0 is English-only."""
 
 PERSONA_MAX_HISTORY : int = int(_persona.get("max_history_turns", 10))
 """Max conversation turns kept in memory for Gemini context."""
@@ -108,8 +168,9 @@ PERSONA_MAX_HISTORY : int = int(_persona.get("max_history_turns", 10))
 PERSONA_SYSTEM_PROMPT : str = _persona.get(
     "system_prompt",
     (
-        f"You are {_cfg['assistant']['name']}, a helpful Hindi/Hinglish voice assistant. "
-        "Speak in Hinglish by default. Keep replies short and TTS-friendly. "
+        f"You are {_cfg['assistant']['name']}, a helpful English voice assistant. "
+        "Always reply in English only, even if the user speaks another language. "
+        "Keep replies short, natural, and TTS-friendly. "
         "No bullet points, no markdown, no special characters."
     )
 )

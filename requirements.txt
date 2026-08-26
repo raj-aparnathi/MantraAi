@@ -10,6 +10,12 @@
 SpeechRecognition==3.17.0
 pyttsx3==2.90
 
+# ── Neural TTS (human-sounding voice) ───────────────────────
+# edge-tts: free Microsoft Edge neural voices, no API key (needs internet).
+# pygame:   in-process MP3 playback of the synthesized speech.
+edge-tts==7.2.8
+pygame==2.6.1
+
 # ── Audio I/O (install via pipwin on Windows if pip fails) ───
 PyAudio==0.2.14
 
