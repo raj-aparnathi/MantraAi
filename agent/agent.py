@@ -30,6 +30,7 @@ Architecture flow:
 
 import random
 import threading
+from pathlib import Path
 
 import config
 from utils import log, normalize, contains_any, get_time, get_date, get_greeting_period
@@ -38,7 +39,7 @@ from utils import log, normalize, contains_any, get_time, get_date, get_greeting
 from brain.brain   import Brain         # LLM router (Gemini + local LLM)
 from agent.tools   import ToolRegistry  # all action tools
 from memory.memory import Memory        # persistent memory
-
+from rag.retriever import Retriever
 
 # ── Built-in response banks ───────────────────────────────────────────────────
 # These handle common phrases instantly, without hitting the LLM.
@@ -110,6 +111,18 @@ class Agent:
         self.brain = Brain()
         self.tools = ToolRegistry()
 
+        # RAG retriever — initialised here so we can check for relevant
+        # documents BEFORE the command reaches generic tools (Wikipedia etc.).
+        try:
+            self.retriever = Retriever()
+            log.info(
+                f"Agent: RAG Retriever ready. "
+                f"Documents: {self.retriever.document_count()}"
+            )
+        except Exception as e:
+            self.retriever = None
+            log.warning(f"Agent: RAG Retriever unavailable: {e}")
+
         log.info("Agent v3.0 initialised. Brain and ToolRegistry ready.")
 
     # ── Public ─────────────────────────────────────────────────────────────────
@@ -138,10 +151,11 @@ class Agent:
         Route a text command to the right handler.
 
         Priority:
-          1. Exit check        → end the session
-          2. Built-in replies  → greetings, time, date, jokes (fast, offline)
-          3. Tools             → apps, system, browser, files, memory, etc.
-          4. Brain (LLM)       → Gemini or local LLM for anything else
+          1. Exit check              → end the session
+          2. Built-in replies        → greetings, time, date, jokes (fast, offline)
+          3. RAG document search     → answer from local knowledge base
+          4. Tools                   → apps, system, browser, files, memory, etc.
+          5. Brain (LLM)             → Gemini or local LLM for anything else
 
         Returns:
             False  → session should end (user said goodbye)
@@ -166,13 +180,19 @@ class Agent:
             self.speak(builtin)
             return True
 
-        # ── 3. Tools ──────────────────────────────────────────────────────────
+        # ── 3. RAG document search ─────────────────────────────────────────────
+        rag_response = self._try_rag(text)
+        if rag_response:
+            self.speak(rag_response)
+            return True
+
+        # ── 4. Tools ──────────────────────────────────────────────────────────
         tool_response = self.tools.execute(text, confirm_callback=self._voice_confirm)
         if tool_response:
             self.speak(tool_response)
             return True
 
-        # ── 4. Brain (LLM) — last resort ──────────────────────────────────────
+        # ── 5. Brain (LLM) — last resort ──────────────────────────────────────
         log.info("Agent: No tool matched. Asking Brain (LLM)...")
         llm_response = self.brain.think(text)
         self.speak(llm_response)
@@ -283,7 +303,119 @@ class Agent:
                 "Just tell me what you need!"
             )
 
+        # Projects — scan the user's project folder and list them
+        if contains_any(t, ["how many project", "my project", "list my project",
+                             "list project", "show my project", "show project",
+                             "current project", "working on",
+                             "what project", "which project"]):
+            return self._list_projects()
+
         return None  # no built-in matched
+
+    # ── Project listing ────────────────────────────────────────────────────────
+
+    _PROJECTS_DIR = Path(r"D:\R09\My Project")
+
+    def _list_projects(self) -> str:
+        """
+        Scan the user's project folder and return a spoken summary
+        of all project directories found.
+        """
+        try:
+            if not self._PROJECTS_DIR.exists():
+                return f"I couldn't find your projects folder at {self._PROJECTS_DIR}."
+
+            projects = sorted(
+                d.name for d in self._PROJECTS_DIR.iterdir()
+                if d.is_dir() and not d.name.startswith(".")
+            )
+
+            if not projects:
+                return "Your projects folder is empty. No projects found."
+
+            count = len(projects)
+            names = ", ".join(projects)
+            return (
+                f"You have {count} project{'s' if count != 1 else ''} "
+                f"in your projects folder. "
+                f"{'They are' if count > 1 else 'It is'}: {names}."
+            )
+        except PermissionError:
+            return "I don't have permission to access your projects folder."
+        except Exception as e:
+            log.warning(f"Project listing failed: {e}")
+            return "Sorry, I had trouble scanning your projects folder."
+    # ── RAG lookup ─────────────────────────────────────────────────────────────
+
+    # Speech-to-text often splits compound names (e.g. "CropX" → "Crop X").
+    # This map lets us normalise those variants before querying the vector DB.
+    _SPEECH_ALIASES: dict[str, str] = {
+        "crop x":  "CropX",
+        "cropx":   "CropX",
+        # Add more aliases here as needed, e.g.:
+        # "dev ops": "DevOps",
+    }
+
+    def _try_rag(self, text: str, distance_threshold: float = 0.85) -> str | None:
+        """
+        Check the RAG knowledge base for relevant documents.
+
+        Returns a contextual LLM answer when the vector database contains
+        matching content, or None so the caller continues to the next
+        routing step (tools → brain).
+
+        Args:
+            text:               The user's original spoken/typed input.
+            distance_threshold: Maximum vector distance to consider relevant.
+        """
+        if self.retriever is None:
+            return None
+
+        try:
+            if not self.retriever.has_documents():
+                return None
+
+            # Normalise speech variations before querying
+            query = text
+            t_lower = normalize(text)
+            for alias, canonical in self._SPEECH_ALIASES.items():
+                if alias in t_lower:
+                    query = text.replace(
+                        # Find the alias in original text (case-insensitive)
+                        next((
+                            text[i:i+len(alias)]
+                            for i in range(len(text) - len(alias) + 1)
+                            if text[i:i+len(alias)].lower() == alias
+                        ), alias),
+                        canonical
+                    )
+                    log.debug(f"RAG: Normalised query '{text}' → '{query}'")
+                    break
+
+            # Search the vector store
+            results = self.retriever.retrieve(query=query, n_results=3)
+            if not results:
+                return None
+
+            # Only proceed if the best result is relevant enough
+            best_distance = results[0].get("distance", 999)
+            if best_distance > distance_threshold:
+                log.info(
+                    f"Agent RAG: Best distance {best_distance:.4f} exceeds "
+                    f"threshold {distance_threshold}. Skipping RAG."
+                )
+                return None
+
+            # Relevant documents found — delegate to Brain's RAG pipeline
+            log.info(
+                f"Agent RAG: Found relevant docs (best distance: "
+                f"{best_distance:.4f}). Using RAG answer."
+            )
+            return self.brain.think_with_rag(query)
+
+        except Exception as e:
+            log.warning(f"Agent RAG lookup failed: {e}")
+            return None
 
     def _voice_confirm(self, prompt: str) -> bool:
         """

@@ -58,3 +58,7 @@ wikipedia==1.4.0
 # Then run: ollama pull llama3
 # No pip package needed — Ollama is a local server.
 # brain/local_llm.py connects to http://localhost:11434
+chromadb
+sentence-transformers
+pypdf
+python-docx

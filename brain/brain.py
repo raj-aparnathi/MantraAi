@@ -33,6 +33,8 @@ from utils import log
 from brain.llm_api   import LLMApi    # online  Gemini API
 from brain.local_llm import LocalLLM  # offline local LLM (Ollama)
 
+# RAG document retriever
+from rag.retriever import Retriever
 class Brain:
     """
     Mantra's LLM router.
@@ -61,6 +63,25 @@ class Brain:
             f"API LLM available: {self._api_llm.is_available()} | "
             f"Local LLM available: {self._local_llm.is_available()}"
         )
+                # ── RAG Retriever ────────────────────────────────────────────────────
+        # Connect Mantra's brain to the local document knowledge base.
+        # If RAG fails for any reason, Mantra should still work normally.
+        try:
+            self._retriever = Retriever()
+
+            log.info(
+                f"RAG initialised. "
+                f"Documents available: {self._retriever.has_documents()} | "
+                f"Chunks: {self._retriever.document_count()}"
+            )
+
+        except Exception as e:
+            self._retriever = None
+
+            log.warning(
+                f"RAG could not be initialised. "
+                f"Mantra will continue without RAG. Error: {e}"
+            )
 
     # ── Public ─────────────────────────────────────────────────────────────────
 
@@ -133,7 +154,216 @@ class Brain:
             "local_llm_available": self._local_llm.is_available(),
             "local_llm_model":     self._local_llm.get_model_name(),
         }
+        # ── RAG ───────────────────────────────────────────────────────────────────
 
+    def think_with_rag(
+        self,
+        user_text: str,
+        n_results: int = 3,
+        distance_threshold: float = 0.85
+    ) -> str:
+        """
+        Answer a question using Mantra's document knowledge base when
+        relevant information is found.
+
+        Flow:
+            User Question
+                ↓
+            Search Vector Database
+                ↓
+            Relevant document found?
+                ├── YES → Send Context + Question to LLM
+                └── NO  → Use normal Brain.think()
+
+        Args:
+            user_text:
+                User's original question.
+
+            n_results:
+                Maximum number of document chunks to retrieve.
+
+            distance_threshold:
+                Maximum allowed vector distance for a result to be
+                considered relevant. Lower distance = more relevant.
+
+        Returns:
+            A response from Gemini, Ollama, or the fallback system.
+        """
+
+        # Empty input → use normal brain behaviour
+        if not user_text or not user_text.strip():
+            return self.think(user_text)
+
+        # If RAG failed during initialisation, continue normally
+        if self._retriever is None:
+            log.debug(
+                "RAG unavailable. Using normal LLM pipeline."
+            )
+
+            return self.think(user_text)
+
+        try:
+
+            # Check whether any documents exist
+            if not self._retriever.has_documents():
+
+                log.debug(
+                    "RAG database is empty. Using normal LLM pipeline."
+                )
+
+                return self.think(user_text)
+
+            # Search for relevant chunks
+            results = self._retriever.retrieve(
+                query=user_text,
+                n_results=n_results
+            )
+
+            # No results → normal LLM
+            if not results:
+
+                log.info(
+                    "RAG found no relevant results. "
+                    "Using normal LLM."
+                )
+
+                return self.think(user_text)
+
+            # Filter results based on vector distance.
+            # Lower distance means the document chunk is more relevant.
+            relevant_results = [
+                result
+                for result in results
+                if result.get("distance", 999)
+                <= distance_threshold
+            ]
+
+            # If nothing is relevant enough, don't force RAG context.
+            # Mantra will answer normally using Gemini/Ollama.
+            if not relevant_results:
+
+                best_distance = results[0].get(
+                    "distance",
+                    None
+                )
+
+                log.info(
+                    f"RAG results not relevant enough. "
+                    f"Best distance: {best_distance}. "
+                    f"Using normal LLM."
+                )
+
+                return self.think(user_text)
+
+            # Build context manually from only relevant chunks
+            context_parts = []
+
+            for index, result in enumerate(
+                relevant_results,
+                start=1
+            ):
+
+                context_parts.append(
+                    f"[Source {index}: "
+                    f"{result['source']} | "
+                    f"Chunk {result['chunk_number']}]\n"
+                    f"{result['text']}"
+                )
+
+            context = "\n\n---\n\n".join(
+                context_parts
+            )
+
+            log.info(
+                f"RAG found {len(relevant_results)} "
+                f"relevant document chunk(s)."
+            )
+
+            # Create an augmented prompt.
+            # The LLM gets the user's question plus information retrieved
+            # from Mantra's local document knowledge base.
+            rag_prompt = f"""
+You are Mantra, a helpful personal AI assistant.
+
+Use the DOCUMENT CONTEXT below to answer the user's question.
+
+Rules:
+1. Answer primarily using the provided document context.
+2. Do not invent information that is not supported by the context.
+3. If the context does not contain enough information, clearly say so.
+4. Keep the answer natural, clear, and suitable for a voice assistant.
+5. Do not mention "vector database", "embedding", or "RAG" unless the user specifically asks about them.
+
+DOCUMENT CONTEXT:
+{context}
+
+USER QUESTION:
+{user_text}
+
+ANSWER:
+"""
+
+            log.info(
+                "RAG context found. Sending contextual prompt "
+                "to LLM."
+            )
+
+            # Reuse the existing Gemini → Ollama → fallback pipeline.
+            # This means we do NOT duplicate or change existing LLM logic.
+            return self.think(rag_prompt)
+
+        except Exception as e:
+
+            # RAG must never break Mantra.
+            # If anything goes wrong, simply use the normal brain.
+            log.error(
+                f"RAG processing failed: {e}. "
+                f"Falling back to normal LLM.",
+                exc_info=True
+            )
+
+            return self.think(user_text)
+
+
+    def rag_status(self) -> dict:
+        """
+        Return the current status of Mantra's RAG system.
+
+        Useful for debugging or future commands such as:
+        'Mantra, how many documents do you know?'
+        """
+
+        if self._retriever is None:
+
+            return {
+                "rag_available": False,
+                "has_documents": False,
+                "document_count": 0
+            }
+
+        try:
+
+            return {
+                "rag_available": True,
+                "has_documents": (
+                    self._retriever.has_documents()
+                ),
+                "document_count": (
+                    self._retriever.document_count()
+                )
+            }
+
+        except Exception as e:
+
+            log.warning(
+                f"Could not get RAG status: {e}"
+            )
+
+            return {
+                "rag_available": False,
+                "has_documents": False,
+                "document_count": 0
+            }
 
 # ── Self-test ─────────────────────────────────────────────────────────────────
 # To test:  python brain/brain.py
@@ -172,3 +402,24 @@ if __name__ == "__main__":
 
     print("=" * 50)
     print("brain/brain.py is working correctly!")
+    print()
+    print("=" * 50)
+    print("Testing RAG Brain Integration...")
+    print()
+
+    rag_question = "What is CropX?"
+
+    print(f"Question: {rag_question}")
+
+    rag_reply = brain.think_with_rag(
+        rag_question
+    )
+
+    print(f"\nRAG Reply:\n{rag_reply}")
+
+    print()
+    print("RAG Status:")
+
+    print(
+        brain.rag_status()
+    )
