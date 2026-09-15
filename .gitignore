@@ -43,6 +43,18 @@ data/voice_cache/
 # Temporary test scripts
 ztest.py
 
+# Environment secrets (API keys) — NEVER commit this
+.env
+
+# User-specific configuration (may contain API keys)
+data/config.json
+
+# Local vector database (user-specific, rebuilt by rag/ingest.py)
+data/vector_db/
+
+# Runtime output
+mantra_run.out
+
 # IDE / Editor settings
 .vscode/
 .idea/

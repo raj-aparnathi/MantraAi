@@ -35,8 +35,12 @@ def _get_volume_interface():
         from comtypes import CLSCTX_ALL
         from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
         devices = AudioUtilities.GetSpeakers()
-        interface = devices.Activate(IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
-        return cast(interface, POINTER(IAudioEndpointVolume))
+        if hasattr(devices, "EndpointVolume"):
+            return devices.EndpointVolume
+        if hasattr(devices, "Activate"):
+            interface = devices.Activate(IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
+            return cast(interface, POINTER(IAudioEndpointVolume))
+        return None
     except Exception as e:
         log.warning(f"pycaw not available: {e}")
         return None
@@ -153,6 +157,18 @@ class SystemControl:
         pyautogui.press("volumedown", presses=5)
         return "Volume decreased."
 
+    def set_volume(self, level: int) -> str:
+        """Set volume to a specific percentage (0–100)."""
+        level = max(0, min(100, level))
+        if self._vol:
+            try:
+                scalar = level / 100.0
+                self._vol.SetMasterVolumeLevelScalar(scalar, None)
+                return f"Volume set to {level} percent."
+            except Exception as e:
+                log.error(f"set_volume error: {e}")
+        return f"Volume set to {level} percent."
+
     def mute(self) -> str:
         """Mute the system volume."""
         if self._vol:
@@ -210,6 +226,7 @@ class SystemControl:
         Parse a natural-language command and execute the matching system action.
         Returns a response string, or None if no system command was matched.
         """
+        import re
         t = normalize(text)
 
         # ── Shutdown ───────────────────────────────────────────────────────────
@@ -236,36 +253,74 @@ class SystemControl:
         if contains_any(t, ["sleep", "hibernate", "suspend"]):
             return self.sleep()
 
-        # ── Volume ─────────────────────────────────────────────────────────────
-        if contains_any(t, ["volume up", "increase volume", "louder", "turn up"]):
-            return self.volume_up()
-
-        if contains_any(t, ["volume down", "decrease volume", "quieter", "turn down", "lower volume"]):
-            return self.volume_down()
-
-        if contains_any(t, ["mute", "silence", "shut up"]):
-            return self.mute()
-
-        if contains_any(t, ["unmute", "turn on volume", "restore volume"]):
+        # ── Volume Control ─────────────────────────────────────────────────────
+        # Mute / Unmute
+        if contains_any(t, ["unmute", "turn on volume", "restore volume", "volume unmute"]):
             return self.unmute()
 
-        if contains_any(t, ["volume", "how loud", "current volume"]):
+        if contains_any(t, ["mute", "silence", "shut up", "volume mute"]):
+            return self.mute()
+
+        # Specific volume level: e.g. "set volume to 80", "volume 50 percent", "volume 70%"
+        if "volume" in t and ("set" in t or "percent" in t or "%" in text or "to" in t.split()):
+            match = re.search(r"(\d+)", t)
+            if match:
+                level = int(match.group(1))
+                return self.set_volume(level)
+
+        # Volume down / decrease
+        if contains_any(t, [
+            "volume decrease", "decrease volume", "volume down",
+            "turn down volume", "turn down the volume", "turn volume down",
+            "lower volume", "lower the volume", "reduce volume", "reduce the volume",
+            "quieter", "less volume", "volume kam karo", "awaaz kam karo", "dheere karo"
+        ]):
+            return self.volume_down()
+
+        # Volume up / increase
+        if contains_any(t, [
+            "volume increase", "increase volume", "volume up",
+            "turn up volume", "turn up the volume", "turn volume up",
+            "raise volume", "raise the volume", "louder", "more volume",
+            "volume badhao", "awaaz badhao", "tez karo"
+        ]):
+            return self.volume_up()
+
+        # Volume status / query
+        if contains_any(t, ["what is the volume", "what is volume", "current volume", "check volume", "volume level", "how loud"]):
             return self.get_volume()
 
-        # ── Brightness ─────────────────────────────────────────────────────────
-        if contains_any(t, ["brightness up", "increase brightness", "brighter", "more brightness"]):
-            return self.brightness_up()
+        if t in ["volume", "sound level", "sound"]:
+            return self.get_volume()
 
-        if contains_any(t, ["brightness down", "decrease brightness", "dimmer", "less brightness", "reduce brightness"]):
-            return self.brightness_down()
-
-        # Specific level: "set brightness to 70"
-        if "brightness" in t and ("set" in t or "percent" in t or "%"):
-            import re
+        # ── Brightness Control ─────────────────────────────────────────────────
+        # Specific brightness level: "set brightness to 70", "brightness 50%"
+        if "brightness" in t and ("set" in t or "percent" in t or "%" in text or "to" in t.split()):
             match = re.search(r"(\d+)", t)
             if match:
                 level = int(match.group(1))
                 return self.set_brightness(level)
+
+        # Brightness down / dim
+        if contains_any(t, [
+            "brightness down", "decrease brightness", "brightness decrease",
+            "dimmer", "less brightness", "reduce brightness", "dim screen",
+            "dim the screen", "lower brightness", "screen brightness down"
+        ]):
+            return self.brightness_down()
+
+        # Brightness up / increase
+        if contains_any(t, [
+            "brightness up", "increase brightness", "brightness increase",
+            "brighter", "more brightness", "raise brightness", "screen brightness up"
+        ]):
+            return self.brightness_up()
+
+        if contains_any(t, ["what is the brightness", "current brightness", "check brightness", "brightness level"]):
+            cur = _get_brightness()
+            if cur is not None:
+                return f"Brightness is at {cur} percent."
+            return "Sorry, I can't read the brightness level."
 
         return None  # not a system command
 

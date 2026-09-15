@@ -310,8 +310,18 @@ class MusicPlayer:
             for prefix in ["play song ", "play track ", "play "]:
                 if prefix in t:
                     song_query = t.split(prefix, 1)[1].strip()
-                    # Filter out generic words
-                    if song_query in ["music", "a music", "a song", "some music", "some songs", "something"]:
+                    # Filter out generic words — these mean "play something random"
+                    generic = {
+                        "song", "songs", "music", "track",
+                        "a song", "a music", "a track",
+                        "some music", "some songs", "some song",
+                        "any song", "any music", "any track",
+                        "something", "anything",
+                        "a song for me", "some music for me",
+                        "me a song", "me some music",
+                        "random song", "random music", "random",
+                    }
+                    if song_query in generic or not song_query:
                         return self.play_random_song()
                     if song_query:
                         return self.play_specific_song(song_query)

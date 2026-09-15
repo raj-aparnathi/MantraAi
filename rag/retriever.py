@@ -7,7 +7,7 @@ Flow:
 
     User Question
           ↓
-    Embedding Model
+    Embedding Model  (lazy-loaded on first use)
           ↓
     Query Vector
           ↓
@@ -18,7 +18,6 @@ Flow:
     Context for LLM
 """
 
-from rag.embeddings import EmbeddingModel
 from rag.vector_store import VectorStore
 
 from utils import log
@@ -30,19 +29,31 @@ class Retriever:
 
     Converts a user query into an embedding and searches
     the vector database for the most relevant document chunks.
+
+    The embedding model (all-MiniLM-L6-v2) is lazy-loaded on
+    the first retrieve() call so it doesn't slow down startup.
     """
 
     def __init__(self):
 
-        # Load embedding model
-        self.embedding_model = EmbeddingModel()
+        # Embedding model — loaded lazily on first retrieve()
+        self._embedding_model = None
 
-        # Connect to vector database
+        # Connect to vector database (lightweight — just opens ChromaDB)
         self.vector_store = VectorStore()
 
         log.info(
-            "RAG Retriever initialised successfully."
+            "RAG Retriever initialised (embedding model deferred)."
         )
+
+    # ── Lazy Embedding Model ───────────────────────────────
+
+    def _get_embedding_model(self):
+        """Load the embedding model on first use."""
+        if self._embedding_model is None:
+            from rag.embeddings import EmbeddingModel
+            self._embedding_model = EmbeddingModel()
+        return self._embedding_model
 
     # ── Search ─────────────────────────────────────────────
 
@@ -77,9 +88,9 @@ class Retriever:
             f"RAG search query: '{query}'"
         )
 
-        # Convert user question into vector
+        # Convert user question into vector (loads model on first call)
         query_embedding = (
-            self.embedding_model.embed_text(query)
+            self._get_embedding_model().embed_text(query)
         )
 
         # Search ChromaDB

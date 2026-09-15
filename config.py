@@ -13,6 +13,14 @@ import json
 import os
 from pathlib import Path
 
+# Load .env file if it exists (API keys, secrets)
+# This MUST run before any os.getenv() calls below.
+try:
+    from dotenv import load_dotenv
+    load_dotenv(Path(__file__).resolve().parent / ".env")
+except ImportError:
+    pass  # python-dotenv not installed — keys must be in env or config.json
+
 # ── Paths ──────────────────────────────────────────────────────────────────────
 BASE_DIR    = Path(__file__).resolve().parent
 DATA_DIR    = BASE_DIR / "data"
@@ -120,6 +128,7 @@ WAKE_EXTRA_VARIANTS   : list  = list(_wake.get("extra_variants", []))
 OPENWEATHER_API_KEY : str = os.getenv("OPENWEATHER_API_KEY", _cfg["api_keys"].get("openweathermap", ""))
 NEWSAPI_KEY         : str = os.getenv("NEWSAPI_KEY", _cfg["api_keys"].get("newsapi", ""))
 GEMINI_API_KEY      : str = os.getenv("GEMINI_API_KEY", _cfg["api_keys"].get("gemini", ""))
+OPENAI_API_KEY      : str = os.getenv("OPENAI_API_KEY", _cfg["api_keys"].get("openai", ""))
 
 # ── Weather ───────────────────────────────────────────────────────────────────
 DEFAULT_CITY  : str = _cfg["weather"]["default_city"]
@@ -184,6 +193,12 @@ LOCAL_LLM_URL   : str = _v3.get("local_llm_url", "http://localhost:11434")
 
 LOCAL_LLM_MODEL : str = _v3.get("local_llm_model", "llama3")
 """Which Ollama model to use as the local LLM fallback (e.g. 'llama3', 'mistral', 'phi3')."""
+
+AI_PROVIDER : str = _v3.get("ai_provider", "auto")
+"""Which AI provider to use: 'gemini', 'openai', or 'auto' (try all in order)."""
+
+OPENAI_MODEL : str = _v3.get("openai_model", "gpt-4o-mini")
+"""Which OpenAI model to use (e.g. 'gpt-4o-mini', 'gpt-4o', 'gpt-3.5-turbo')."""
 
 # ── v3.0: Memory ──────────────────────────────────────────────────────────────
 MEMORY_FILE : str = _v3.get("memory_file", str(DATA_DIR / "memory.json"))

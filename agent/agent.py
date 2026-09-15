@@ -406,12 +406,24 @@ class Agent:
                 )
                 return None
 
-            # Relevant documents found — delegate to Brain's RAG pipeline
+            # Build context from relevant results for the Brain
+            context_parts = []
+            for index, result in enumerate(results, start=1):
+                if result.get("distance", 999) <= distance_threshold:
+                    context_parts.append(
+                        f"[Source {index}: "
+                        f"{result['source']} | "
+                        f"Chunk {result['chunk_number']}]\n"
+                        f"{result['text']}"
+                    )
+
+            context = "\n\n---\n\n".join(context_parts)
+
             log.info(
-                f"Agent RAG: Found relevant docs (best distance: "
-                f"{best_distance:.4f}). Using RAG answer."
+                f"Agent RAG: Found {len(context_parts)} relevant doc(s) "
+                f"(best distance: {best_distance:.4f}). Using RAG answer."
             )
-            return self.brain.think_with_rag(query)
+            return self.brain.think_with_rag(query, context)
 
         except Exception as e:
             log.warning(f"Agent RAG lookup failed: {e}")

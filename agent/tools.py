@@ -134,29 +134,29 @@ class ToolRegistry:
         if response:
             return response
 
-        # ── 7. File Manager ────────────────────────────────────────────────────
+        # ── 8. File Manager ────────────────────────────────────────────────────
         response = self.file_manager.parse_and_execute(
             text, confirm_callback=confirm_callback
         )
         if response:
             return response
 
-        # ── 8. Browser ────────────────────────────────────────────────────────
+        # ── 9. Browser ────────────────────────────────────────────────────────
         response = self.browser.parse_and_execute(text)
         if response:
             return response
 
-        # ── 9. Automation ─────────────────────────────────────────────────────
+        # ── 10. Automation ─────────────────────────────────────────────────────
         response = self.automation.parse_and_execute(text)
         if response:
             return response
 
-        # ── 10. Memory ────────────────────────────────────────────────────────
+        # ── 11. Memory ────────────────────────────────────────────────────────
         response = self._try_memory(text)
         if response:
             return response
 
-        # ── 11. Updater ───────────────────────────────────────────────────────
+        # ── 12. Updater ───────────────────────────────────────────────────────
         response = self._try_updater(text)
         if response:
             return response
@@ -263,10 +263,20 @@ class ToolRegistry:
         Examples:
           "check for updates"
           "update yourself"
+          "update"
+          "mantra update"
           "what version are you"
         """
         from utils import normalize, contains_any
         t = normalize(text)
+
+        # Full update flow: "update", "update yourself", "mantra update"
+        # Check this BEFORE "check for update" so "update" doesn't fall through
+        if contains_any(t, ["update yourself", "update mantra"]):
+            return self._do_update()
+        # Bare "update" — but not "check for update" or "check update"
+        if "update" in t and not contains_any(t, ["check for", "check update", "any update", "new update"]):
+            return self._do_update()
 
         if contains_any(t, ["check for update", "check update", "any update", "new update"]):
             return self.updater.check_for_update()
@@ -275,3 +285,57 @@ class ToolRegistry:
             return f"I am Mantra version {self.updater.current_version()}."
 
         return None
+
+    def _do_update(self) -> str:
+        """
+        Full update workflow:
+          1. Check GitHub for newer version
+          2. If up to date → say so
+          3. If available → download & apply → return result
+        """
+        import requests
+        log.info("Updater: Voice update requested. Checking GitHub...")
+
+        try:
+            # Reuse the existing check logic to get release info
+            url = f"{self.updater._repo_url}/releases/latest"
+            resp = requests.get(url, timeout=10)
+            resp.raise_for_status()
+            data = resp.json()
+
+            latest_version = data.get("tag_name", "").lstrip("v")
+            if not latest_version:
+                return "I couldn't find version information from the update server."
+
+            from updater.updater import _version_tuple
+            current_t = _version_tuple(self.updater._current_version)
+            latest_t = _version_tuple(latest_version)
+
+            if latest_t <= current_t:
+                return "I am already up to date."
+
+            # Find the download URL (zip asset or zipball)
+            download_url = None
+            assets = data.get("assets", [])
+            for asset in assets:
+                if asset.get("name", "").endswith(".zip"):
+                    download_url = asset.get("browser_download_url")
+                    break
+            if not download_url:
+                download_url = data.get("zipball_url")
+
+            if not download_url:
+                return (
+                    f"Version {latest_version} is available, but I couldn't "
+                    f"find a download link. Please update manually."
+                )
+
+            log.info(f"Updater: Downloading version {latest_version}...")
+            result = self.updater.apply_update(download_url)
+            return result
+
+        except requests.ConnectionError:
+            return "I couldn't check for updates. Please check your internet connection."
+        except Exception as e:
+            log.error(f"Updater: Voice update failed: {e}")
+            return "Something went wrong while trying to update. Please try again later."

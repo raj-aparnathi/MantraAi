@@ -1,14 +1,14 @@
-# 🎙️ Mantra AI v3.0 — Intelligent Voice & Desktop Automation Agent
+# 🎙️ Mantra AI v3.1 — Intelligent Voice & Desktop Automation Agent
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Version-3.0_Clean_Architecture-blue.svg?style=for-the-badge" alt="Version 3.0" />
-  <img src="https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12-brightgreen.svg?style=for-the-badge" alt="Python Version" />
+  <img src="https://img.shields.io/badge/Version-3.1_Multi--Provider-blue.svg?style=for-the-badge" alt="Version 3.1" />
+  <img src="https://img.shields.io/badge/Python-3.10%20–%203.14-brightgreen.svg?style=for-the-badge" alt="Python Version" />
   <img src="https://img.shields.io/badge/Platform-Windows%2010%20%7C%2011-0078D6.svg?style=for-the-badge&logo=windows" alt="Platform" />
-  <img src="https://img.shields.io/badge/AI%20Brain-Gemini%20%2B%20Ollama%20Fallback-orange.svg?style=for-the-badge" alt="Dual Brain" />
+  <img src="https://img.shields.io/badge/AI%20Brain-Gemini%20%2B%20OpenAI%20%2B%20Ollama-orange.svg?style=for-the-badge" alt="Triple Brain" />
   <img src="https://img.shields.io/badge/Voice%20Control-Wake%20Word%20Enabled-red.svg?style=for-the-badge" alt="Voice Control" />
 </p>
 
-> **Mantra AI v3.0** is an enterprise-grade, voice-controlled AI desktop assistant and automation system built specifically for Windows. Powered by a **Hybrid Dual-LLM Brain** (Google Gemini Cloud + Local Ollama Offline Fallback), persistent cross-session memory, biometric speaker verification, local media control, and full-spectrum desktop automation.
+> **Mantra AI v3.1** is an enterprise-grade, voice-controlled AI desktop assistant and automation system built specifically for Windows. Powered by a **Multi-Provider AI Brain** (Google Gemini + OpenAI GPT + Local Ollama Offline Fallback), persistent cross-session memory, biometric speaker verification, RAG knowledge base, local media control, and full-spectrum desktop automation.
 >
 > 🗣️ **Default Wake Word:** `"Hello Mantra"`  
 > 🌐 **Persona:** Natural English Conversational Agent (English-only input and output)
@@ -17,54 +17,55 @@
 
 ## 📑 Table of Contents
 
-- [✨ What's New in v3.0](#-whats-new-in-v30)
+- [✨ What's New in v3.1](#-whats-new-in-v31)
 - [⚡ Feature Matrix](#-feature-matrix)
 - [🏗️ System Architecture](#️-system-architecture)
 - [📁 Project Structure](#-project-structure)
 - [🚀 Quick Start & Installation](#-quick-start--installation)
+- [🔑 API Key Setup (.env)](#-api-key-setup-env)
 - [⚙️ Configuration Guide (`data/config.json`)](#️-configuration-guide-dataconfigjson)
+- [🤖 AI Provider Switching](#-ai-provider-switching)
 - [🗣️ Voice Command Reference](#️-voice-command-reference)
-- [🧠 Hybrid Brain & Local LLM (Ollama)](#-hybrid-brain--local-llm-ollama)
+- [🧠 Multi-Provider AI Brain](#-multi-provider-ai-brain)
 - [🔒 Speaker Verification (Voice Biometrics)](#-speaker-verification-voice-biometrics)
 - [🎵 Local Music Player](#-local-music-player)
+- [📚 RAG Knowledge Base](#-rag-knowledge-base)
 - [🔄 Self-Update System](#-self-update-system)
 - [🛠️ Diagnostics & Troubleshooting](#️-diagnostics--troubleshooting)
 - [📦 Dependencies & Libraries](#-dependencies--libraries)
 
 ---
 
-## ✨ What's New in v3.0
+## ✨ What's New in v3.1
 
-Mantra AI v3.0 represents a complete architectural evolution from a monolithic script into a clean, modular, production-ready system:
+### Multi-Provider AI Brain
+- **OpenAI GPT support** alongside existing Google Gemini — switch between providers with one config change.
+- **Auto mode** (default): tries Gemini → OpenAI → Ollama automatically, so Mantra always has an AI brain available.
+- No new SDK dependencies — OpenAI API uses the same lightweight `requests` library as Gemini.
 
-1. **Clean Modular Architecture (`agent/`, `brain/`, `voice/`, `apps/`, `memory/`, `system/`, `updater/`)**:
-   - Replaced legacy monolithic routing with a dedicated **`Agent` orchestrator** and **`ToolRegistry`** pipeline.
-   - Decoupled voice I/O, intelligence reasoning, and system execution into discrete testable packages.
+### Lazy RAG Loading
+- **Embedding model (`all-MiniLM-L6-v2`) is now lazy-loaded** — it only loads on the first RAG query, not at startup.
+- Startup is significantly faster. `VectorStore` (ChromaDB) still initialises immediately so `has_documents()` works instantly.
+- Fixed **duplicate RAG initialisation** — previously the embedding model loaded twice (once in Agent, once in Brain). Now only a single `Retriever` instance exists.
 
-2. **Dual-Brain Hybrid Intelligence (Online + Offline LLM)**:
-   - **Primary**: Google Gemini API with persistent multi-turn conversational context and English persona tuning.
-   - **Offline Fallback**: Seamless automatic handover to local **Ollama** (`llama3`, `mistral`, `phi3`) when offline or on API timeout.
+### Voice Update Command
+- New voice commands: **"Update"**, **"Update yourself"**, **"Mantra, update"**, **"Mantra, update yourself"**.
+- Full workflow: checks GitHub → downloads if available → applies update → confirms by voice.
+- If already up to date: *"I am already up to date."*
 
-3. **Long-Term Persistent Memory Engine (`memory/memory.py`)**:
-   - Remembers user preferences, facts, and relationships across restarts (`data/memory.json`).
-   - Natural language commands to `remember`, `recall`, `list`, and `forget` facts.
+### Security Improvements
+- **API keys moved to `.env` file** — secrets are git-ignored and never committed to your repository.
+- `.env.example` template included for easy setup.
+- `data/config.json` added to `.gitignore` to prevent accidental key exposure.
 
-4. **Biometric Speaker Verification (`voice/speaker_verify.py`)**:
-   - Optional voiceprint enrollment and cosine similarity verification using Mel-Frequency Cepstral audio embeddings via `resemblyzer`.
-   - Restricts assistant activation exclusively to your voice.
+### Python 3.13 & 3.14 Compatibility
+- Full support for Python 3.13 and 3.14 via `audioop-lts` and `PyAudioWPatch`.
+- Updated `requirements.txt` with flexible `>=` version pinning.
 
-5. **Local Music Engine (`apps/music_player.py`)**:
-   - Recursive audio indexing (`.mp3`, `.wav`, `.flac`, `.m4a`, `.aac`, `.ogg`).
-   - Fuzzy search, random shuffle, playlist traversal (next/prev/stop), and advanced filters (by artist, album, genre, year, composer, lyrics).
-
-6. **Automated Safe Self-Updater (`updater/updater.py`)**:
-   - Checks GitHub releases for new updates with changelog inspection.
-   - Automatic pre-update timestamped backups of all code files (`data/backups/`).
-   - Preserves user configurations (`config.json`, `memory.json`, `notes.json`).
-
-7. **Advanced Audio Processing & Voice Pipeline**:
-   - 16 kHz Mono capture with dynamic RMS volume normalization.
-   - Ambient noise calibration and exponential network error backoff.
+### Codebase Cleanup
+- Removed dead files (`ztest.py`, `mantra_run.out`, stale `__pycache__/` directories).
+- Fixed comment numbering in tool priority chain.
+- Organized `requirements.txt` with proper section headers.
 
 ---
 
@@ -73,8 +74,9 @@ Mantra AI v3.0 represents a complete architectural evolution from a monolithic s
 | Category | Capability | Description | Example Voice Command |
 |---|---|---|---|
 | **Voice & Wake Word** | Continuous Background Listener | Low-latency wake word detection with active session loop | *"Hello Mantra"* |
-| **Hybrid Brain** | Google Gemini + Ollama Fallback | Cloud-scale intelligence with offline local LLM backup | *"Explain quantum computing in simple words"* |
+| **Multi-Provider AI Brain** | Gemini + OpenAI + Ollama | Cloud-scale intelligence with automatic provider fallback | *"Explain quantum computing in simple words"* |
 | **Long-Term Memory** | Fact & Preference Persistence | Stores key-value facts across sessions | *"Remember my car is a Honda City"*, *"What is my car?"* |
+| **RAG Knowledge Base** | Document-Powered Answers | Answers questions from your local document collection | *"What is CropX?"* |
 | **Speaker Biometrics** | Voiceprint Verification | Enrolls user audio fingerprint to prevent unauthorized access | `python voice/speaker_verify.py --enroll <wav>` |
 | **Local Music Player** | Library Browser & Playback | Plays, shuffles, stops, and filters local music collection | *"Play Believer"*, *"Next song"*, *"Songs by Arijit Singh"* |
 | **App Automation** | Natural Launch & Kill | Opens, closes, and detects running desktop software | *"Open VS Code"*, *"Close Spotify"*, *"What apps are running?"* |
@@ -87,7 +89,7 @@ Mantra AI v3.0 represents a complete architectural evolution from a monolithic s
 | **Browser Navigation** | Tab & Bookmark Control | Searches Google/YouTube, manages tabs, opens quick bookmarks | *"Search Python tutorial on YouTube"*, *"Open bookmark email"* |
 | **Web Services** | Live Weather, News & Wikipedia | Real-time weather, headline news, and Wikipedia summaries | *"Weather in Mumbai"*, *"Latest tech news"*, *"Who was APJ Abdul Kalam?"* |
 | **Notes Management** | Interactive Notepad | Create, read, and delete persistent notes | *"Add note buy groceries"*, *"Read my notes"*, *"Delete note 1"* |
-| **Self-Updater** | Version Check & Upgrade | GitHub release inspection, automatic backup, and safe patching | *"Check for updates"*, *"What version are you?"* |
+| **Self-Updater** | Voice Update & Version Check | GitHub release check, automatic backup, download, and safe patching via voice | *"Update yourself"*, *"Check for updates"*, *"What version are you?"* |
 
 ---
 
@@ -110,38 +112,39 @@ Mantra AI v3.0 represents a complete architectural evolution from a monolithic s
                                   └──────────────┬─────────────────┘
                                                  │
                         ┌────────────────────────┴────────────────────────┐
-                        ▼                                                         ▼
-         ┌───────────────────────────────┐                 ┌──────────────────────────────┐
-         │     voice/speech_to_text.py        │                 │   voice/speaker_verify.py          │
-         │  16kHz Mono + Normalization        │                 │   Biometric Authentication.        │
-         └──────────────┬────────────────┘                 └──────────────────────────────┘
+                        ▼                                                ▼
+         ┌───────────────────────────┐              ┌──────────────────────────────┐
+         │   voice/speech_to_text.py │              │   voice/speaker_verify.py    │
+         │   16kHz Mono + Normalize  │              │   Biometric Authentication   │
+         └──────────────┬────────────┘              └──────────────────────────────┘
                         │ Spoken Text
                         ▼
-         ┌────────────────────────────────────────────────────────────────────────┐
-         │                          agent/agent.py                                             │
-         │   Priority 1: Exit / Bye                                                            │
-         │   Priority 2: Built-in fast answers (Time, Date, Greetings, Jokes)                  │
-         │   Priority 3: Tool Execution (agent/tools.py)                                       │
-         │   Priority 4: AI Reasoning Fallback (brain/brain.py)                                │
-         └──────────────┬──────────────────────────────────────────┬──────────────┘
-                           │                                                │
-        ┌───────────────┴───────────────┐          ┌───────────────┴──────────────┐
-        ▼                                    ▼         ▼                                   ▼
-┌───────────────────────────────┐ ┌────────────────────────────────┐ ┌───────────────────────────┐
-│       agent/tools.py                │ │       brain/brain.py                │ │   voice/text_to_speech.py      │
-│ ├── apps/open_app.py               │ │ ├── brain/llm_api.py (Gemini)       │ │ SAPI5 / pyttsx3 Engine         │
-│ ├── apps/music_player.py           │ │ └── brain/local_llm.py (Ollama).    │ └───────────────────────────┘
-│ ├── system/system_control.py.      │ └────────────────────────────────┘
-│ ├── memory/memory.py               │
-│ ├── automation.py                  │
-│ ├── file_manager.py                │
-│ ├── browser.py                     │
-│ ├── screen.py                      │
-│ ├── clipboard.py                   │
-│ ├── notes.py                       │
-│ ├── internet.py                    │
-│ └── updater/updater.py             │
-└───────────────────────────────┘
+         ┌────────────────────────────────────────────────────────────────────┐
+         │                          agent/agent.py                           │
+         │   Priority 1: Exit / Bye                                          │
+         │   Priority 2: Built-in fast answers (Time, Date, Greetings)       │
+         │   Priority 3: RAG document search                                 │
+         │   Priority 4: Tool Execution (agent/tools.py)                     │
+         │   Priority 5: AI Brain Fallback (brain/brain.py)                  │
+         └──────────────┬──────────────────────────────────┬─────────────────┘
+                        │                                  │
+        ┌───────────────┴──────────────┐    ┌──────────────┴──────────────────┐
+        ▼                              ▼    ▼                                 ▼
+┌──────────────────────────────┐ ┌──────────────────────────────────┐ ┌──────────────────────┐
+│       agent/tools.py         │ │         brain/brain.py           │ │ voice/text_to_speech  │
+│ ├── apps/open_app.py         │ │ ┌─ brain/llm_api.py (Gemini)    │ │ edge-tts Neural TTS   │
+│ ├── apps/music_player.py     │ │ ├─ brain/openai_llm.py (OpenAI) │ └──────────────────────┘
+│ ├── system/system_control.py │ │ └─ brain/local_llm.py (Ollama)  │
+│ ├── memory/memory.py         │ └──────────────────────────────────┘
+│ ├── automation.py            │
+│ ├── file_manager.py          │
+│ ├── browser.py               │
+│ ├── screen.py                │
+│ ├── clipboard.py             │
+│ ├── notes.py                 │
+│ ├── internet.py              │
+│ └── updater/updater.py       │
+└──────────────────────────────┘
 ```
 
 ---
@@ -151,49 +154,60 @@ Mantra AI v3.0 represents a complete architectural evolution from a monolithic s
 ```
 MantraAI/
 ├── main.py                     # Entry point — wake word listener & session lifecycle loop
-├── config.py                   # Centralized configuration parser and global settings
+├── config.py                   # Centralized configuration parser (.env + config.json)
 ├── utils.py                    # Logging engine, NLP text normalizer, date/time utilities
 ├── diagnose.py                 # System diagnostic & dependency verification tool
 ├── requirements.txt            # Python package specifications
-├── mantra.log                  # Rolling application log file
+├── .env                        # API keys (git-ignored, never committed)
+├── .env.example                # Template showing which env vars to set
 │
-├── ── agent/ ─────────────────────────────────────────────────────────────
+├── agent/
 │   ├── __init__.py
 │   ├── agent.py                # Core Agent: session manager, built-in responses & dispatch
 │   └── tools.py                # ToolRegistry: priority-based execution router for all tools
 │
-├── ── brain/ ─────────────────────────────────────────────────────────────
+├── brain/
 │   ├── __init__.py
-│   ├── brain.py                # LLM Router: tries Gemini Cloud API → falls back to Ollama
-│   ├── llm_api.py              # Google Gemini 2.5/3.6 Flash client with conversation memory
+│   ├── brain.py                # LLM Router: Gemini → OpenAI → Ollama → fallback
+│   ├── llm_api.py              # Google Gemini Flash client with conversation memory
+│   ├── openai_llm.py           # OpenAI GPT client (gpt-4o-mini / gpt-4o)
 │   └── local_llm.py            # Local Ollama HTTP client (offline Llama 3 / Mistral)
 │
-├── ── voice/ ─────────────────────────────────────────────────────────────
+├── voice/
 │   ├── __init__.py
 │   ├── wake_word.py            # Threaded continuous wake word listener ("Hello Mantra")
 │   ├── speech_to_text.py       # 16kHz STT with dynamic RMS volume normalization
-│   ├── text_to_speech.py       # Thread-safe Windows SAPI5 TTS engine
+│   ├── text_to_speech.py       # Neural TTS via edge-tts with MP3 caching
 │   └── speaker_verify.py       # Biometric speaker voiceprint enrollment and verification
 │
-├── ── apps/ ──────────────────────────────────────────────────────────────
+├── apps/
 │   ├── __init__.py
 │   ├── open_app.py             # Application launcher, process killer, and alias resolver
 │   └── music_player.py         # Local offline music player, library indexer & smart filter
 │
-├── ── memory/ ────────────────────────────────────────────────────────────
+├── memory/
 │   ├── __init__.py
 │   └── memory.py               # Long-term persistent key-value memory engine
 │
-├── ── system/ ────────────────────────────────────────────────────────────
+├── system/
 │   ├── __init__.py
-│   └── system_control.py       # Windows master volume, screen brightness & power management
+│   └── system_control.py       # Windows volume, screen brightness & power management
 │
-├── ── updater/ ───────────────────────────────────────────────────────────
+├── updater/
 │   ├── __init__.py
 │   └── updater.py              # GitHub release checker, auto-backup & safe patch extractor
 │
-├── ── Feature Modules (Root) ─────────────────────────────────────────────
-│   ├── automation.py           # Window management (minimize, maximize, focus, Office 365)
+├── rag/
+│   ├── __init__.py
+│   ├── retriever.py            # RAG search and context builder
+│   ├── vector_store.py         # ChromaDB vector database interface
+│   ├── embeddings.py           # Sentence-transformer embedding model
+│   ├── chunker.py              # Document text chunking
+│   ├── document_loader.py      # PDF and DOCX document loader
+│   └── ingest.py               # Document ingestion pipeline
+│
+├── Feature Modules (Root)
+│   ├── automation.py           # Window management (minimize, maximize, focus)
 │   ├── browser.py              # Web searches, tab operations & bookmark manager
 │   ├── file_manager.py         # File search, create, rename, copy, move & safe trash
 │   ├── screen.py               # Fast screen capture (mss) and video recording (OpenCV)
@@ -201,11 +215,14 @@ MantraAI/
 │   ├── notes.py                # Persistent interactive notes CRUD
 │   └── internet.py             # Weather (OpenWeatherMap), News (NewsAPI), Wikipedia search
 │
-└── ── data/ ──────────────────────────────────────────────────────────────
-    ├── config.json             # Master JSON configuration (keys, paths, settings)
-    ├── memory.json             # Stored long-term persistent memories
-    ├── notes.json              # Stored user notes
-    └── backups/                # Automatic pre-update backup archives
+├── data/
+│   ├── config.json             # Master JSON configuration (git-ignored)
+│   ├── memory.json             # Stored long-term persistent memories
+│   ├── notes.json              # Stored user notes
+│   └── vector_db/              # ChromaDB vector database for RAG
+│
+└── rag_documents/              # Place PDF/DOCX files here for RAG ingestion
+    └── (your documents)
 ```
 
 ---
@@ -214,7 +231,7 @@ MantraAI/
 
 ### 1. Prerequisites
 - **Operating System:** Windows 10 or Windows 11 (64-bit recommended)
-- **Python:** Python 3.10, 3.11, or 3.12
+- **Python:** Python 3.10, 3.11, 3.12, 3.13, or 3.14
 - **Audio:** Working Microphone and Speakers / Headphones
 
 ### 2. Clone the Repository
@@ -235,14 +252,10 @@ pip install -r requirements.txt
 > pipwin install pyaudio
 > ```
 
-### 4. Configure `data/config.json`
-Add your API keys in `data/config.json`:
-- **Gemini API Key:** Required for cloud AI conversation ([Get a free key from Google AI Studio](https://aistudio.google.com/)).
-- **OpenWeatherMap Key:** (Optional) For live weather updates.
-- **NewsAPI Key:** (Optional) For live news headlines.
+### 4. Set Up API Keys
+See the [API Key Setup](#-api-key-setup-env) section below.
 
 ### 5. Run Diagnostics (Optional but Recommended)
-Verify your audio devices, libraries, and configurations:
 ```bash
 python diagnose.py
 ```
@@ -256,9 +269,48 @@ Say **"Hello Mantra"** to wake the assistant!
 
 ---
 
+## 🔑 API Key Setup (.env)
+
+Mantra AI uses a `.env` file to store API keys securely. This file is **git-ignored** and never committed to your repository.
+
+### Quick Setup
+
+1. Copy the example file:
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Edit `.env` and add your API keys:
+   ```env
+   # Required — at least one AI provider key
+   GEMINI_API_KEY=your_gemini_api_key_here
+   OPENAI_API_KEY=your_openai_api_key_here
+
+   # Optional — for weather and news features
+   OPENWEATHER_API_KEY=your_openweather_key_here
+   NEWSAPI_KEY=your_newsapi_key_here
+   ```
+
+### Where to Get API Keys
+
+| Key | Where to Get It | Required? |
+|---|---|---|
+| `GEMINI_API_KEY` | [Google AI Studio](https://aistudio.google.com/) | At least one AI key needed |
+| `OPENAI_API_KEY` | [OpenAI Platform](https://platform.openai.com/api-keys) | At least one AI key needed |
+| `OPENWEATHER_API_KEY` | [OpenWeatherMap](https://openweathermap.org/appid) | Optional (for weather) |
+| `NEWSAPI_KEY` | [NewsAPI](https://newsapi.org/register) | Optional (for news) |
+
+> [!IMPORTANT]
+> You need **at least one AI provider key** (Gemini or OpenAI) for Mantra to answer questions intelligently. If neither is set, Mantra falls back to Ollama (local LLM) or a polite fallback message.
+
+> [!TIP]
+> **Alternative:** API keys can also be set in `data/config.json` under `api_keys`, or as system environment variables. The priority order is: **Environment Variables → `.env` file → `config.json`**.
+
+---
+
 ## ⚙️ Configuration Guide (`data/config.json`)
 
-Mantra AI v3.0 centralizes all settings in `data/config.json`:
+Mantra AI centralizes all settings in `data/config.json`:
 
 ```json
 {
@@ -266,7 +318,7 @@ Mantra AI v3.0 centralizes all settings in `data/config.json`:
     "name": "Mantra",
     "wake_word": "hello mantra",
     "language": "en-US",
-    "version": "3.0",
+    "version": "3.1",
     "timezone": "Asia/Kolkata"
   },
   "tts": {
@@ -284,75 +336,72 @@ Mantra AI v3.0 centralizes all settings in `data/config.json`:
     "language": "en-IN",
     "energy_threshold": 250,
     "pause_threshold": 0.7,
-    "non_speaking_duration": 0.3,
-    "phrase_threshold": 0.2,
     "timeout": 6,
     "phrase_time_limit": 12,
     "sample_rate": 16000,
     "normalize_audio": true,
     "calibration_duration": 1.0
   },
-  "wake": {
-    "listen_timeout": 1.5,
-    "phrase_time_limit": 3.0,
-    "min_speech_seconds": 0.35,
-    "fuzzy_threshold": 0.75,
-    "wake_on_name_only": true
-  },
   "api_keys": {
-    "gemini": "YOUR_GEMINI_API_KEY",
-    "openweathermap": "YOUR_OPENWEATHER_KEY",
-    "newsapi": "YOUR_NEWSAPI_KEY"
-  },
-  "weather": {
-    "default_city": "Mumbai",
-    "units": "metric"
-  },
-  "apps": {
-    "chrome": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
-    "vscode": "C:\\Users\\Username\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe",
-    "spotify": "C:\\Users\\Username\\AppData\\Roaming\\Spotify\\Spotify.exe",
-    "notepad": "notepad.exe",
-    "calculator": "calc.exe",
-    "explorer": "explorer.exe",
-    "word": "C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE",
-    "excel": "C:\\Program Files\\Microsoft Office\\root\\Office16\\EXCEL.EXE",
-    "powerpoint": "C:\\Program Files\\Microsoft Office\\root\\Office16\\POWERPNT.EXE"
-  },
-  "music": {
-    "folder": "D:\\Music"
-  },
-  "v2": {
-    "screenshots_dir": "D:\\Pictures\\Screenshots",
-    "recordings_dir": "D:\\Videos\\Screen Recordings",
-    "volume_step": 0.1,
-    "brightness_step": 10,
-    "bookmarks": {
-      "email": "https://mail.google.com",
-      "calendar": "https://calendar.google.com",
-      "drive": "https://drive.google.com",
-      "github": "https://github.com"
-    }
+    "gemini": "",
+    "openai": "",
+    "openweathermap": "",
+    "newsapi": ""
   },
   "v3": {
+    "ai_provider": "auto",
+    "openai_model": "gpt-4o-mini",
     "local_llm_url": "http://localhost:11434",
-    "local_llm_model": "llama3",
-    "memory_file": "",
-    "updater_repo": "https://github.com/raj-aparnathi/MantraAi.git"
+    "local_llm_model": "llama3"
   },
   "persona": {
     "default_language": "english",
     "max_history_turns": 10,
-    "system_prompt": "You are MANTRA, an advanced English-speaking AI voice assistant... Always reply in English only..."
+    "system_prompt": "You are MANTRA, an advanced English-speaking AI voice assistant..."
   }
 }
 ```
+
+> [!NOTE]
+> API keys in `config.json` are used as **fallbacks** when the `.env` file or environment variables don't have them set. For security, prefer using the `.env` file.
+
+---
+
+## 🤖 AI Provider Switching
+
+Mantra AI v3.1 supports three AI providers. You can switch between them by changing the `ai_provider` setting in `data/config.json`:
+
+```json
+"v3": {
+  "ai_provider": "auto"
+}
+```
+
+### Available Modes
+
+| Mode | Behavior | Best For |
+|---|---|---|
+| `"auto"` (default) | Tries Gemini → OpenAI → Ollama in order | Maximum reliability — always finds an AI |
+| `"gemini"` | Uses only Gemini API → falls back to Ollama | When you prefer Google's AI |
+| `"openai"` | Uses only OpenAI API → falls back to Ollama | When you prefer ChatGPT models |
+
+### OpenAI Model Selection
+
+You can change which OpenAI model Mantra uses:
+
+```json
+"v3": {
+  "openai_model": "gpt-4o-mini"
+}
+```
+
+Supported models: `gpt-4o-mini` (fast, cheap), `gpt-4o` (most capable), `gpt-3.5-turbo` (legacy).
 
 ---
 
 ## 🗣️ Voice Command Reference
 
-### 🧠 Memory & Personalization (v3.0)
+### 🧠 Memory & Personalization
 ```
 "Remember that my birthday is November 14"
 "Remember my favorite color is dark blue"
@@ -361,27 +410,22 @@ Mantra AI v3.0 centralizes all settings in `data/config.json`:
 "Forget my favorite color"
 ```
 
-### 🎵 Local Music Player (v3.0)
+### 🎵 Local Music Player
 ```
-"Play some music" / "Gana bajao"
-"Play song Kesariya" / "Play Believer"
-"Next song" / "Previous song" / "Agla gana"
-"Stop the music" / "Music band karo"
+"Play some music" / "Play song Kesariya"
+"Next song" / "Previous song"
+"Stop the music"
 "List all songs" / "Show my songs"
 "Songs by artist Arijit Singh"
-"Songs from album Rockstar"
 ```
 
 ### 💻 App Launching & Window Management
 ```
 "Open Chrome" / "Open VS Code" / "Open Spotify"
 "Launch Word" / "Open Excel" / "Open PowerPoint"
-"Open my coding software"           → Opens VS Code
-"I want to listen to music"         → Opens Spotify
 "Close Chrome" / "Close Notepad"
 "Minimize VS Code" / "Maximize Chrome"
 "Switch to Spotify"
-"What apps are running?"
 ```
 
 ### 📁 File Manager & Safe Deletion
@@ -389,7 +433,6 @@ Mantra AI v3.0 centralizes all settings in `data/config.json`:
 "Create folder Project Alpha"
 "Create file meeting_notes"
 "Find file quarterly_report"
-"Search for AI project folder"
 "Open Downloads" / "Open Documents" / "Open Desktop"
 "Delete file draft.txt"             → Safely sent to Windows Recycle Bin
 ```
@@ -398,27 +441,22 @@ Mantra AI v3.0 centralizes all settings in `data/config.json`:
 ```
 "Volume up" / "Volume down" / "Mute" / "Unmute"
 "Set volume to 80 percent"
-"Increase brightness" / "Dim the screen" / "Set brightness to 50"
+"Increase brightness" / "Dim the screen"
 "Lock my computer" / "Go to sleep"
-"Restart computer"                  → Requires voice confirmation ("yes"/"no")
+"Restart computer"                  → Requires voice confirmation
 "Shut down"                         → Requires voice confirmation
-"Cancel shutdown"
 ```
 
 ### 📸 Screen Capture & Video Recording
 ```
-"Take a screenshot"                 → Saved to configured Screenshots folder
-"Start recording"                   → Records screen in MP4 format
-"Stop recording"                    → Finalizes and saves MP4 video
+"Take a screenshot"
+"Start recording" / "Stop recording"
 ```
 
 ### 📋 Clipboard Tools
 ```
-"Copy that" / "Copy this"
-"Paste it" / "Paste here"
-"Cut that"
-"Clear clipboard"
-"What's in my clipboard?"
+"Copy that" / "Paste it" / "Cut that"
+"Clear clipboard" / "What's in my clipboard?"
 ```
 
 ### 🌐 Web, Search & Bookmarks
@@ -426,9 +464,7 @@ Mantra AI v3.0 centralizes all settings in `data/config.json`:
 "Search Python tutorial on Google"
 "Search machine learning on YouTube"
 "Open YouTube" / "Open GitHub" / "Open Gmail"
-"Open bookmark email" / "Open bookmark drive"
-"List my bookmarks"
-"Open new tab" / "Close tab" / "Refresh page"
+"Open bookmark email" / "List my bookmarks"
 ```
 
 ### 🌦️ Weather, News & Knowledge
@@ -442,50 +478,53 @@ Mantra AI v3.0 centralizes all settings in `data/config.json`:
 
 ### 🔄 Updates & Identity
 ```
-"Check for updates"
-"What version are you?"
+"Update" / "Update yourself" / "Mantra, update"
+"Check for updates" / "What version are you?"
 "Introduce yourself" / "What can you do?"
 "Goodbye" / "Bye Mantra" / "Go to sleep"
 ```
 
 ---
 
-## 🧠 Hybrid Brain & Local LLM (Ollama)
+## 🧠 Multi-Provider AI Brain
 
-Mantra AI v3.0 features a resilient two-tier AI architecture:
+Mantra AI v3.1 features a resilient three-tier AI architecture:
 
 ```
-User Query ──► Gemini 2.5/3.6 Flash (Online) ──► Success ──► Voice Output
-                       │ (Network failure / No key / Rate limit)
+User Query ──► Gemini Flash (Online) ──► Success ──► Voice Output
+                       │ (Failed / No key)
                        ▼
-               Ollama Local LLM (Offline Llama 3 / Mistral) ──► Voice Output
-                       │ (Ollama not running)
+               OpenAI GPT (Online) ──► Success ──► Voice Output
+                       │ (Failed / No key)
+                       ▼
+               Ollama Local LLM (Offline) ──► Success ──► Voice Output
+                       │ (Not running)
                        ▼
                Safe Natural Language Fallback
 ```
 
+The provider priority is controlled by the `ai_provider` config setting (see [AI Provider Switching](#-ai-provider-switching)).
+
 ### Setting up Offline Intelligence with Ollama:
 1. Download and install **Ollama** from [ollama.com](https://ollama.com/download).
-2. Pull your preferred model in your terminal:
+2. Pull your preferred model:
    ```bash
    ollama pull llama3
    ```
-3. Ollama runs a local HTTP service on `http://localhost:11434`. Mantra AI will automatically detect and route queries through Ollama when offline!
+3. Ollama runs a local HTTP service on `http://localhost:11434`. Mantra AI will automatically detect and route queries through Ollama when cloud APIs are unavailable.
 
 ---
 
 ## 🔒 Speaker Verification (Voice Biometrics)
 
-Mantra AI v3.0 includes an optional speaker verification subsystem located in `voice/speaker_verify.py`.
+Optional speaker verification in `voice/speaker_verify.py`.
 
-### 1. Enrollment
-Record a 5–10 second WAV file of yourself speaking naturally (e.g., saying *"Hello Mantra"* 4–5 times) using Windows Sound Recorder, then run:
+### Enrollment
 ```bash
 python voice/speaker_verify.py --enroll path/to/my_voice.wav
 ```
-This extracts your MFCC voiceprint embedding and saves it securely to `data/voiceprint.json`.
 
-### 2. Verification Test
+### Verification Test
 ```bash
 python voice/speaker_verify.py --verify path/to/sample.wav
 ```
@@ -494,48 +533,75 @@ python voice/speaker_verify.py --verify path/to/sample.wav
 
 ## 🎵 Local Music Player
 
-Mantra AI v3.0 includes a dedicated local audio player (`apps/music_player.py`) that scans your personal library without needing third-party streaming services:
+Configure your music folder in `data/config.json`:
+```json
+"music": {
+  "folder": "D:\\Music"
+}
+```
 
-- **Configure your music folder** in `data/config.json`:
-  ```json
-  "music": {
-    "folder": "D:\\Music"
-  }
-  ```
-- **Supported Formats:** `.mp3`, `.wav`, `.flac`, `.aac`, `.m4a`, `.ogg`.
-- Supports random shuffle, exact song search, and attribute filters (artist, album, genre, year, composer, lyrics).
+**Supported Formats:** `.mp3`, `.wav`, `.flac`, `.aac`, `.m4a`, `.ogg`.
+
+---
+
+## 📚 RAG Knowledge Base
+
+Mantra AI includes a Retrieval-Augmented Generation (RAG) system that lets you query your own documents.
+
+The embedding model (`all-MiniLM-L6-v2`) is **lazy-loaded** — it only loads when you first ask a RAG question, keeping startup fast.
+
+### Setup
+1. Place PDF or DOCX files in the `rag_documents/` folder.
+2. Run the ingestion pipeline:
+   ```bash
+   python -m rag.ingest
+   ```
+3. Ask Mantra questions about your documents naturally.
 
 ---
 
 ## 🔄 Self-Update System
 
-Mantra AI v3.0 includes a built-in updater (`updater/updater.py`) for safe updates from GitHub:
+Built-in updater (`updater/updater.py`) for safe updates from GitHub.
 
+### Voice Commands
+```
+"Update"                    → Check + download + apply in one step
+"Update yourself"           → Same as above
+"Mantra, update"            → Same as above
+"Check for updates"         → Only checks, doesn't apply
+"What version are you?"     → Reports current version
+```
+
+If already on the latest version, Mantra responds: *"I am already up to date."*
+
+### Manual Update
 ```bash
-# Test update status directly
 python updater/updater.py
 ```
 
-### Safety Features:
-- **Automatic Code Backup:** Creates a timestamped archive of all source files in `data/backups/` before any files are modified.
-- **Protected User Data:** Never overwrites or touches `data/config.json`, `data/memory.json`, `data/notes.json`, or log files.
-- **Voice Confirmation Required:** Never updates without user authorization.
+**Safety Features:**
+- Automatic code backup before updates (`data/backups/`)
+- Never overwrites `config.json`, `memory.json`, `notes.json`
+- Downloads and applies updates safely with error recovery
 
 ---
 
 ## 🛠️ Diagnostics & Troubleshooting
 
-Run the included diagnostic script to test your environment:
 ```bash
 python diagnose.py
 ```
 
-### Common Solutions:
-- **Microphone not detected:** Check Windows Settings > Privacy & Security > Microphone and ensure desktop apps have access.
-- **PyAudio install error:** Run `pip install pipwin` followed by `pipwin install pyaudio`.
-- **Gemini API Error:** Verify your API key in `data/config.json` or ensure `GEMINI_API_KEY` is set in your environment.
-- **Local LLM not responding:** Ensure Ollama is running (`ollama serve` or desktop tray app) and `ollama pull llama3` has finished.
-- **Volume control not working:** Verify `pycaw` and `comtypes` are installed.
+### Common Solutions
+| Problem | Solution |
+|---|---|
+| Microphone not detected | Check Windows Settings → Privacy → Microphone access |
+| PyAudio install error | `pip install pipwin && pipwin install pyaudio` |
+| Gemini API error | Verify `GEMINI_API_KEY` in `.env` |
+| OpenAI API error | Verify `OPENAI_API_KEY` in `.env` |
+| Local LLM not responding | Ensure Ollama is running and `ollama pull llama3` completed |
+| Volume control not working | Verify `pycaw` and `comtypes` are installed |
 
 ---
 
@@ -543,22 +609,29 @@ python diagnose.py
 
 | Library | Version | Purpose |
 |---|---|---|
-| `SpeechRecognition` | `3.17.0` | Microphone audio capture and Google Speech-to-Text conversion |
-| `pyttsx3` | `2.90` | Offline text-to-speech synthesis with SAPI5 voice selection |
-| `PyAudio` | `0.2.14` | Low-level cross-platform audio stream I/O |
-| `pyautogui` | `0.9.54` | Programmatic keyboard, mouse, and multimedia key emulation |
-| `psutil` | `6.1.1` | Process management, app lifecycle monitoring, and process termination |
-| `pygetwindow` | `0.0.9` | Windows GUI management (minimize, maximize, window focus) |
-| `pycaw` | `20240210` | Core Audio Windows API wrapper for precision volume control |
-| `screen-brightness-control`| `0.23.0` | Display brightness querying and adjustment |
-| `mss` | `9.0.2` | Ultra-fast cross-platform screen grabbing |
-| `opencv-python` | `4.10.0.84` | Video stream processing and MP4 screen recording |
-| `Pillow` | `11.2.1` | Image manipulation and screenshot file export |
-| `pyperclip` | `1.9.0` | Cross-platform clipboard read/write engine |
-| `send2trash` | `1.8.3` | Native Windows Recycle Bin deletion (prevents accidental file loss) |
-| `requests` | `2.32.3` | HTTP client for Gemini API, Ollama server, Weather, and News APIs |
-| `wikipedia` | `1.4.0` | Wikipedia encyclopedia search and extraction |
-| `resemblyzer` *(Optional)* | Latest | Deep learning voice encoder for biometric speaker verification |
+| `SpeechRecognition` | `>=3.17.0` | Microphone audio capture and Google STT |
+| `pyttsx3` | `>=2.90` | Offline TTS with SAPI5 voice selection |
+| `edge-tts` | `>=7.0.0` | Neural TTS via Microsoft Edge voices |
+| `pygame-ce` | `>=2.5.0` | In-process MP3 playback |
+| `PyAudioWPatch` | `>=0.2.12` | Low-level audio stream I/O (Python 3.14 compatible) |
+| `audioop-lts` | `>=0.2.1` | audioop shim for Python 3.13+ |
+| `pyautogui` | `>=0.9.54` | Keyboard, mouse, and multimedia key emulation |
+| `psutil` | `>=6.1.1` | Process management and monitoring |
+| `pygetwindow` | `>=0.0.9` | Window management (minimize, maximize, focus) |
+| `pycaw` | `>=20240210` | Windows Core Audio volume control |
+| `screen-brightness-control` | `>=0.23.0` | Display brightness adjustment |
+| `mss` | `>=9.0.2` | Ultra-fast screen grabbing |
+| `opencv-python` | `>=4.10.0` | Video processing and MP4 recording |
+| `Pillow` | `>=11.0.0` | Image manipulation and screenshot export |
+| `pyperclip` | `>=1.9.0` | Clipboard read/write |
+| `send2trash` | `>=1.8.3` | Native Recycle Bin deletion |
+| `requests` | `>=2.32.3` | HTTP client for all APIs (Gemini, OpenAI, Ollama, Weather, News) |
+| `wikipedia` | `>=1.4.0` | Wikipedia search and extraction |
+| `python-dotenv` | `>=1.0.0` | Secure `.env` file loading for API keys |
+| `chromadb` | `>=1.0.0` | Persistent vector database for RAG |
+| `sentence-transformers` | `>=2.0.0` | Embedding model for RAG search (lazy-loaded) |
+| `pypdf` | `>=4.0.0` | PDF document loading for RAG |
+| `python-docx` | `>=1.0.0` | DOCX document loading for RAG |
 
 ---
 
@@ -566,10 +639,10 @@ python diagnose.py
 
 - **Lead Developer:** [Raj Aparnathi](https://github.com/raj-aparnathi)
 - **Project:** Mantra AI — Personal Assistant & Desktop Automation Suite
-- **Architecture:** Clean Architecture v3.0
+- **Architecture:** Multi-Provider AI v3.1
 
 ---
 
 <p align="center">
-  <b>Mantra AI v3.0</b> • Built with ❤️ in Python
+  <b>Mantra AI v3.1</b> • Built with ❤️ in Python
 </p>
