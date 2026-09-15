@@ -62,9 +62,7 @@
 - Full support for Python 3.13 and 3.14 via `audioop-lts` and `PyAudioWPatch`.
 - Updated `requirements.txt` with flexible `>=` version pinning.
 
-### Codebase Cleanup
-- Removed dead files (`ztest.py`, `mantra_run.out`, stale `__pycache__/` directories).
-- Fixed comment numbering in tool priority chain.
+
 - Organized `requirements.txt` with proper section headers.
 
 ---
@@ -403,7 +401,7 @@ Supported models: `gpt-4o-mini` (fast, cheap), `gpt-4o` (most capable), `gpt-3.5
 
 ### 🧠 Memory & Personalization
 ```
-"Remember that my birthday is November 14"
+"Remember that my birthday is October 24"
 "Remember my favorite color is dark blue"
 "What is my birthday?"
 "What do you remember?"
