@@ -1,7 +1,7 @@
 import requests, config
 
 key = config.GEMINI_API_KEY
-url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=' + key
+url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=' + key
 
 payload = {
     'system_instruction': {'parts': [{'text': config.PERSONA_SYSTEM_PROMPT}]},
@@ -9,7 +9,7 @@ payload = {
     'generationConfig': {'temperature': 0.7, 'maxOutputTokens': 100}
 }
 
-print('Testing gemini-2.5-flash with your API key...')
+print('Testing gemini-3.6-flash with your API key...')
 try:
     r = requests.post(url, json=payload, timeout=15)
     print('HTTP status:', r.status_code)
